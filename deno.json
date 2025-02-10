@@ -1,0 +1,9 @@
+{
+	"name": "@ballistic/core",
+	"version": "a0.0.1",
+	"lint": {
+		"rules": {
+			"exclude": ["no-var","no-explicit-any"]
+		}
+	}
+}
