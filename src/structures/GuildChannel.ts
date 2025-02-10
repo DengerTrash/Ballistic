@@ -11,7 +11,7 @@ export class GuildChannel extends BaseChannel{
 		this.channel_id = channel_id;
 	}
 	send(data: string){
-		this.client.rest.postMassage(this.channel_id, {
+		this.client.rest.sendMessage(this.channel_id, {
 			content: data
 		})
 	}
