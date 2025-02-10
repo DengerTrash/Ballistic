@@ -1,7 +1,8 @@
 import { GatewayManager } from "../gateway/gatewayManager.ts";
 import { RESTManager } from "../rest/restManager.ts";
+import { gatewayEventHandler, gatewayEventHandlerTypes } from "../gateway/gatewayEventHandler.ts";
 import {
-	GuildChannel,Message
+	GuildChannel, Message
 } from "../structures/mod.ts";
 import Ballister from "../util/event.ts";
 
@@ -28,15 +29,23 @@ export class Client extends Ballister{
 		if(!this.token){
 			throw new Error('Token is undefined or Invalid')
 		}
-
 		this.gatewayManager = new GatewayManager(this.token);
 		this.restManager = new RESTManager(this.token);
+		for(const handle in gatewayEventHandler){
+			this.gatewayManager.on(handle, (events) => {
+				const instances:{
+					[key:string]: any
+				} = {};
+				const institems = gatewayEventHandler[handle as keyof typeof gatewayEventHandler];
+				if(!institems.requirement.includes(institems.returnValue)) throw new Error('GatewayEventHandler has invalid requirement or returnValue')
 
-		this.gatewayManager.on('MESSAGE_CREATE', (event) => {
-			const chac = new GuildChannel(this, event.channel_id);
-			const meme = new Message(this, chac, event);
-			this.emit('MESSAGE_CREATE',meme)
-		})
+				if(institems.requirement.includes('GuildChannel')) instances.GuildChannel = new GuildChannel(this, events.channel_id);				
+				if(institems.requirement.includes('Message')) instances.Message = new Message(this, instances.GuildChannel, events);
+
+				const returnvalue = instances[institems.returnValue]
+				this.emit(handle, returnvalue)
+			})
+		}
 	}
 	login(){
 		this.gatewayManager.connect();

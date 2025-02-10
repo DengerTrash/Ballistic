@@ -64,7 +64,7 @@ export class GatewayManager extends Ballister{
 					console.log(`op: ${op}\n`,`d: ${JSON.stringify(d)}\n`, `s: ${s}\n`, `t: ${t}`)
 				}
 				this.readyStatus = true
-				this.emit(t!,d)
+				this.emit(t!,d);
 
 				break
 			}
