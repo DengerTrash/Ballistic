@@ -2,32 +2,36 @@ import { Client } from "../mod.ts";
 import { Base } from "./Base.ts";
 import { GuildChannel } from "./mod.ts";
 
-export interface MessageContent {
+export interface MessagePayload {
 	content: string,
-	components?: Array<any>,
-	// そのうちEmbedContentへ差し替えます
-	embeds?: Array<any>,
-	allowed_mentions?: any,
-	nonce?: string,
-	tts?: boolean
+	components?: any
+	channel_id?: string
 }
+
+export interface MessageContent extends MessagePayload {
+	channel_id: string
+}
+
 export class Message extends Base{
 	readonly data: any | undefined;
 	private client: Client;
 	public channel: GuildChannel;
 	public guild_id: number | undefined;
+	public content: string | undefined;
 
-	get content(){
-		return this.data.content;
-	}
+	/**
+	 * 
+	 * @param client 
+	 * @param channel 
+	 * @param data 
+	 */
 	constructor(client:Client, channel: GuildChannel, data: any){
 		super();
 		this.client = client;
 		this.channel = channel;
-		this.data = data;
 		this.guild_id = data.guild_id;
-	}
-	send(messageContent: string){
-		console.log(this.data)
+		this.data = data;
+
+		this.content = data.content
 	}
 }

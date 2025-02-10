@@ -1,6 +1,6 @@
 import { GatewayManager } from "../gateway/gatewayManager.ts";
 import { RESTManager } from "../rest/restManager.ts";
-import { gatewayEventHandler, gatewayEventHandlerTypes } from "../gateway/gatewayEventHandler.ts";
+import { gatewayEventHandler } from "../gateway/gatewayEventHandler.ts";
 import {
 	GuildChannel, Message
 } from "../structures/mod.ts";
@@ -8,8 +8,11 @@ import Ballister from "../util/event.ts";
 
 
 export class Client extends Ballister{
+	//*@private */
 	private token: string | undefined;
+	//*@private */
 	private gatewayManager: GatewayManager;
+	//*@private */
 	private restManager: RESTManager;
 
 	get gateway(){

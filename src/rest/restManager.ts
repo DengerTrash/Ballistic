@@ -1,4 +1,4 @@
-import { MessageContent } from "../structures/Message.ts";
+import { MessagePayload } from "../structures/mod.ts";
 import Ballister from "../util/event.ts";
 
 export class RESTManager extends Ballister{
@@ -11,7 +11,14 @@ export class RESTManager extends Ballister{
 		this.token = token
 		this.url = `${this.baseURL}/v${this.api_version}`
 	}
-	postMassage(channel: string, args: MessageContent): boolean{
+	/**
+	 * /channels/[channel Id]/messagesへポストする場合に使用します。
+	 * 成功した場合はtrueを返します。
+	 * @param channel 
+	 * @param args 
+	 * @returns true | false
+	 */
+	postMassage(channel: string, args: MessagePayload): boolean{
 		const link: string = `${this.url}/channels/${channel}/messages`;
 		fetch(link, {
 			method: 'POST',

@@ -61,7 +61,8 @@ export class GatewayManager extends Ballister{
 					console.log(`| ${this.bot_name} is READY!`)
 				}
 				else{
-					console.log(`op: ${op}\n`,`d: ${JSON.stringify(d)}\n`, `s: ${s}\n`, `t: ${t}`)
+					console.log(`op: ${op}\n`, `s: ${s}\n`, `t: ${t}`)
+					console.dir(d)
 				}
 				this.readyStatus = true
 				this.emit(t!,d);
