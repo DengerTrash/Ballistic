@@ -10,7 +10,7 @@ export interface WebSocketResponse {
 }
 
 export class GatewayManager extends Ballister{
-	private token: string | undefined
+	private token: string;
 	private websocket: WebSocket | undefined
 	private sequence_number: number | null = null
 	private isHeartbeatSend: boolean = false
@@ -21,10 +21,10 @@ export class GatewayManager extends Ballister{
 	public api_version: number = 10
 	public heartbeat_interval: number | null = null
 	public bot_name: string | undefined;
-
+	
 	constructor(token: string | undefined){
 		super()
-		this.token = token
+		this.token = token!
 	}
 	public connect(){
 		this.initWebSocket()

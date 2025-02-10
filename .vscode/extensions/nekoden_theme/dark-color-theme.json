@@ -1,0 +1,15 @@
+{
+	"name": "NEKODEN dark",
+	"type": "dark",
+	"semanticHighlighting": true,
+	"semanticTokenColors": {
+		"class": "#00ffdd",
+		"comment": "#9c9c9c",
+		"function": "#7ddd00",
+		"*.declaration": "#ff0000"
+	},
+	"colors": {
+		"editor.foreground": "#ddd"
+	},
+	"tokenColors": []
+}

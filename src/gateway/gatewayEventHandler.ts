@@ -1,7 +1,9 @@
+import { GuildChannel, Message } from "../structures/mod.ts";
+
 export interface gatewayEventHandlerTypes {
 	[key:string]: {
-		requirement: (string)[],
-		returnValue: string
+		requirement: (any)[],
+		returnValue: any
 	}
 }
 export const gatewayEventHandler: gatewayEventHandlerTypes = {

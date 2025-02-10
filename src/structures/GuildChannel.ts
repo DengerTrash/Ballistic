@@ -1,5 +1,6 @@
 import { Client } from "../mod.ts";
 import { BaseChannel } from "./BaseChannel.ts";
+import { MessagePayload } from "./mod.ts";
 
 export class GuildChannel extends BaseChannel{
 	private client: Client;
@@ -11,7 +12,7 @@ export class GuildChannel extends BaseChannel{
 	}
 	send(data: string){
 		this.client.rest.postMassage(this.channel_id, {
-			"content": data
+			content: data
 		})
 	}
 }

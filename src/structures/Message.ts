@@ -4,8 +4,14 @@ import { GuildChannel } from "./mod.ts";
 
 export interface MessagePayload {
 	content: string,
-	components?: any
-	channel_id?: string
+	tts?: boolean,
+	embeds?: any,
+	allowed_mentions?: any,
+	message_reference?: any,
+	components?: any,
+	sticker_ids?: any,
+	files?: any,
+	poll?: any
 }
 
 export interface MessageContent extends MessagePayload {
@@ -16,8 +22,8 @@ export class Message extends Base{
 	readonly data: any | undefined;
 	private client: Client;
 	public channel: GuildChannel;
-	public guild_id: number | undefined;
 	public content: string | undefined;
+	public guild_id: number | undefined;
 
 	/**
 	 * 
@@ -31,7 +37,6 @@ export class Message extends Base{
 		this.channel = channel;
 		this.guild_id = data.guild_id;
 		this.data = data;
-
 		this.content = data.content
 	}
 }

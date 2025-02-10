@@ -42,8 +42,8 @@ export class Client extends Ballister{
 				const institems = gatewayEventHandler[handle as keyof typeof gatewayEventHandler];
 				if(!institems.requirement.includes(institems.returnValue)) throw new Error('GatewayEventHandler has invalid requirement or returnValue')
 
-				if(institems.requirement.includes('GuildChannel')) instances.GuildChannel = new GuildChannel(this, events.channel_id);				
-				if(institems.requirement.includes('Message')) instances.Message = new Message(this, instances.GuildChannel, events);
+				if(institems.requirement.includes("GuildChannel")) instances.GuildChannel = new GuildChannel(this, events.channel_id);				
+				if(institems.requirement.includes("Message")) instances.Message = new Message(this, instances.GuildChannel, events);
 
 				const returnvalue = instances[institems.returnValue]
 				this.emit(handle, returnvalue)

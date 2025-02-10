@@ -1,0 +1,23 @@
+{
+	"configurations": [
+	{
+		"name": "test.ts",
+		"request": "launch",
+		"type": "node",
+		"cwd": "${workspaceFolder}",
+		"runtimeExecutable": "deno",
+		"runtimeArgs": ["--env=.env_debug", "test.ts"]
+	},
+	{
+		"args": [
+			"--extensionDevelopmentPath=${workspaceFolder}"
+		],
+		"name": "拡張機能の起動",
+		"outFiles": [
+			"${workspaceFolder}/out/**/*.js"
+		],
+		"request": "launch",
+		"type": "extensionHost"
+	}
+	]
+}

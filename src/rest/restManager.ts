@@ -41,4 +41,27 @@ export class RESTManager extends Ballister{
 		})
 		return false
 	}
+	patchChannel(channel: string, args: MessagePayload): boolean{
+		const link: string = `${this.url}/channels/${channel}`;
+		fetch(link, {
+			method: 'PATCH',
+			headers:{
+				Authorization: "Bot " + this.token,
+				"Content-Type": 'application/json',
+				'User-Agent': 'DiscordBot (BallisticDev 1)'
+			},
+			body: JSON.stringify(args)
+		}).then(async(res) => {
+			if(!res.ok){
+				console.error('| REST API ERROR!')
+				const caught = await res.json()
+				console.log(`|\'${caught.message}\'`)
+			}
+			return true
+		}).catch(e => {
+			console.error(`REST API ERROR: ${e}`)
+			return false
+		})
+		return false
+	}
 }

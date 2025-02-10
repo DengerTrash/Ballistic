@@ -1,0 +1,23 @@
+{
+	"name": "nekoden-theme",
+	"displayName": "NEKODEN THEME",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.22.0"
+	},
+	"categories": ["Themes"],
+	"contributes": {
+		"themes": [
+			{
+				"label": "NEKODEN light",
+				"uiTheme": "vs",
+				"path": "./light.jsonc"
+			},
+			{
+				"label": "NEKODEN dark",
+				"uiTheme": "vs-dark",
+				"path": "./dark-color-theme.json"
+			}
+		]
+	}
+}
