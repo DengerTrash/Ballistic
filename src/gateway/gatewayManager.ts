@@ -22,9 +22,10 @@ export class GatewayManager extends Ballister{
 	public heartbeat_interval: number | null = null
 	public bot_name: string | undefined;
 	
-	constructor(token: string | undefined){
+	constructor(client: Client, token: string | undefined){
 		super()
 		this.token = token!
+		this.client = client
 	}
 	public connect(){
 		this.initWebSocket()

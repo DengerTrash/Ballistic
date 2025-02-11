@@ -1,12 +1,13 @@
 import { GatewayManager } from "../gateway/gatewayManager.ts";
 import { RESTManager } from "../rest/restManager.ts";
-import { gatewayEventHandler, gatewayEvents } from "../gateway/gatewayEventHandler.ts";
+import { ClientEvents } from "./clientEvent.ts";
 import {
 	GuildChannel, Message
 } from "../structures/mod.ts";
 import Ballister from "../util/event.ts";
 
-export class Client extends Ballister{
+type EventType<event extends keyof ClientEvents> = ClientEvents[event];
+export class Client{
 	//*@private */
 	private token: string | undefined;
 	//*@private */
@@ -26,28 +27,18 @@ export class Client extends Ballister{
 	 * @param token 
 	 */
 	constructor(token: string){
-		super();
 		this.token = token;
 		if(!this.token){
 			throw new Error('Token is undefined or Invalid')
 		}
-		this.gatewayManager = new GatewayManager(this.token);
+		this.gatewayManager = new GatewayManager(this, this.token);
 		this.restManager = new RESTManager(this.token);
-		
-		for(const handle in gatewayEventHandler){
-			this.gatewayManager.on(handle, (events) => {
-				const instances:{
-					GuildChannel?: GuildChannel | undefined,
-					Message?: Message | undefined
-				} = {};
-				const institems = gatewayEventHandler[handle as keyof typeof gatewayEventHandler];
-				if(!institems.requirement.includes(institems.returnValue)) throw new Error('GatewayEventHandler has invalid requirement or returnValue')
-				if(institems.requirement.includes("GuildChannel")) instances.GuildChannel = new GuildChannel(this, events.channel_id);				
-				if(institems.requirement.includes("Message")) instances.Message = new Message(this, instances.GuildChannel!, events);
-				
-
-			})
-		}
+	}
+	regist<Event extends keyof ClientEvents>(
+		eventName: Event,
+		listener: (args: EventType<Event>) => void
+	){
+		this.gatewayManager.on(eventName,listener);
 	}
 	login(){
 		this.gatewayManager.connect();
