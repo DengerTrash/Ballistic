@@ -1,10 +1,14 @@
-import { Client } from './src/mod.ts';
-const client = new Client(Deno.env.get('TOKEN')!);
+import * as Ballistic from './src/mod.ts';
+const client = new Ballistic.Client(Deno.env.get('TOKEN')!);
 
-client.regist('MESSAGE_CREATE', message => {
-	if(message?.content != 'hello!') return
-	console.log(message?.channel)
-	message?.channel.send('なんだお前')
+client.add({
+	trigger: 'MESSAGE_CREATE',
+	execute: (event) => {
+		const { message } = event;
+		if(message?.content != 'hello!') return
+		console.log(message?.channel)
+		message?.reply('なんだお前')
+	}
 })
 
 client.login();

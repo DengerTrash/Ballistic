@@ -1,6 +1,9 @@
 {
 	"name": "@ballistic/core",
 	"version": "a0.0.1",
+	"exports":{
+		".": "./mod.ts"
+	},
 	"lint": {
 		"rules": {
 			"exclude": ["no-var","no-explicit-any"]

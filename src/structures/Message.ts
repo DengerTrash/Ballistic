@@ -14,6 +14,8 @@ export interface MessagePayload {
 	poll?: any
 }
 
+export type sendMessageType = string | MessagePayload;
+
 export interface MessageContent extends MessagePayload {
 	channel_id: string
 }
@@ -38,5 +40,14 @@ export class Message extends Base{
 		this.guild_id = data.guild_id;
 		this.data = data;
 		this.content = data.content
+	}
+	reply(content: string | MessagePayload){
+		this.channel.send(content,{
+			reply: {
+				type: this.data.type,
+				message_id: this.data.id,
+				channel_id: this.data.channel_id
+			}
+		})
 	}
 }

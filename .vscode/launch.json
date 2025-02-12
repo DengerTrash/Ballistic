@@ -9,6 +9,14 @@
 		"runtimeArgs": ["--env=.env_debug", "test.ts"]
 	},
 	{
+		"name": "run this file",
+		"request": "launch",
+		"type": "node",
+		"cwd": "${workspaceFolder}",
+		"runtimeExecutable": "deno",
+		"runtimeArgs": ["--env=.env_debug", "${file}"]
+	},
+	{
 		"args": [
 			"--extensionDevelopmentPath=${workspaceFolder}"
 		],
