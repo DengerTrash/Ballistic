@@ -111,4 +111,16 @@ export class GatewayManager extends Ballister{
 		}
 		this.send(payload)
 	}
+	public connectVoiceChannel(guild: string, channel: string, self_mute: boolean, self_deaf: boolean){
+		const payload = {
+			op: 4,
+			d: {
+				guild_id: guild,
+				channel_id: channel,
+				self_mute: self_mute,
+				self_deaf: self_deaf
+			}
+		}
+		this.send(payload);
+	}
 }
