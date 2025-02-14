@@ -7,7 +7,7 @@ import {
 import Ballister from "../util/event.ts";
 
 type EventType<event extends keyof ClientEvents> = ClientEvents[event];
-interface EventRegistorPayload<Event extends keyof ClientEvents>{
+interface EventRegisterPayload<Event extends keyof ClientEvents>{
 	trigger: Event;
 	execute: (event: CommonEvents) => void;
 }
@@ -44,7 +44,7 @@ export class Client{
 	){
 		this.gatewayManager.on(eventName,listener);
 	}
-	add<T extends keyof ClientEvents>(data: EventRegistorPayload<T>){
+	add<T extends keyof ClientEvents>(data: EventRegisterPayload<T>){
 		const execute = data.execute;
 		this.gatewayManager.on(data.trigger,(args) => {
 			const common = new CommonEvents(data.trigger, this, args);
