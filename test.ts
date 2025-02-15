@@ -1,7 +1,7 @@
 import * as Ballistic from './src/mod.ts';
 const client = new Ballistic.Client(Deno.env.get('TOKEN')!);
 
-client.add({
+client.event({
 	trigger: 'MESSAGE_CREATE',
 	execute: (event) => {
 		const { message } = event;

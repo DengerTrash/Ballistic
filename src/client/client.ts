@@ -44,7 +44,7 @@ export class Client{
 	){
 		this.gatewayManager.on(eventName,listener);
 	}
-	add<T extends keyof ClientEvents>(data: EventRegisterPayload<T>){
+	event<T extends keyof ClientEvents>(data: EventRegisterPayload<T>){
 		const execute = data.execute;
 		this.gatewayManager.on(data.trigger,(args) => {
 			const common = new CommonEvents(data.trigger, this, args);
