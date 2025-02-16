@@ -1,13 +1,16 @@
 import * as Ballistic from './src/mod.ts';
-const client = new Ballistic.Client(Deno.env.get('TOKEN')!);
+const intents = Ballistic.Intents
+const client = new Ballistic.Client(Deno.env.get('TOKEN')!,[
+	intents.all
+]);
 
-client.event({
+client.events({
 	trigger: 'MESSAGE_CREATE',
-	execute: (event) => {
+	execute: async(event) => {
 		const { message } = event;
 		if(message?.content != 'hello!') return
 		console.log(message?.channel)
-		message?.reply('なんだお前')
+		await message?.reply('なんだお前')
 	}
 })
 

@@ -1,7 +1,7 @@
-import { Client } from "../mod.ts";
+import type { Client } from "../mod.ts";
 import { Guild, GuildChannel, Message } from "../structures/mod.ts";
 
-export interface ClientEvents {
+export interface GatewayEvents {
 	CHANNEL_EDIT?: GuildChannel;
 	MESSAGE_CREATE?: Message;
 }
