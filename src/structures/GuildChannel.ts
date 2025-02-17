@@ -2,7 +2,6 @@ import { Client } from "../mod.ts";
 import { BaseChannel, Guild, MessagePayload } from "./mod.ts";
 
 export class GuildChannel extends BaseChannel{
-	private client: Client;
 	readonly channel_id: string;
 	constructor(client: Client, channel_id: string){
 		super();

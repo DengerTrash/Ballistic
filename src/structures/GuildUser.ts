@@ -1,12 +1,8 @@
 import { Client } from "../mod.ts";
 import { Base } from "./Base.ts";
+import { BaseUser } from "./BaseUser.ts";
 
-export interface BaseChannelStructure {
-	id: any
-	type: number
-}
-
-export class BaseChannel extends Base{
+export class GuildUser extends BaseUser{
 	constructor(client: Client){
 		super(client)
 	}

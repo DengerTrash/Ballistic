@@ -1,6 +1,5 @@
 export * from './Base.ts'
 export * from './BaseChannel.ts'
-export * from './BaseGuild.ts'
 export * from './Guild.ts'
 export * from './GuildChannel.ts'
 export * from './GuildVoiceChannel.ts'
