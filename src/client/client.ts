@@ -1,13 +1,18 @@
 import { GatewayManager } from "../gateway/gatewayManager.ts";
-import { Intents } from "../intents/intents.ts";
 import { RESTManager } from "../rest/restManager.ts";
-import { type GatewayEvents, CommonEvents } from "./clientEvent.ts";
+import { CommonEvents } from "./clientEvent.ts";
+import { GuildCache, GuildChannelCache } from "../cache/mod.ts";
+import type { GatewayEvents } from "../gateway/GatewayEvents.ts";
 
 type EventType<event extends keyof GatewayEvents> = GatewayEvents[event];
 interface EventRegisterPayload<Event extends keyof GatewayEvents>{
 	trigger: Event;
 	execute: (event: CommonEvents) => void;
 }
+/**
+ * 至極普通のクライアントですが、何か？
+ * This is a client.. but what?
+ */
 export class Client{
 	//*@private */
 	private token: string | undefined;
@@ -15,6 +20,11 @@ export class Client{
 	private gatewayManager: GatewayManager;
 	//*@private */
 	private restManager: RESTManager;
+
+	readonly clientName: string | undefined;
+
+	public channels: GuildChannelCache;
+	public guilds: GuildCache;
 
 	private intent: (number)[] | undefined;
 	private intentValue: number | undefined;
@@ -29,8 +39,9 @@ export class Client{
 	 * A Discord bot client.
 	 * @param token 
 	 */
-	constructor(token: string, intent: (number)[]){
+	constructor(clientName: string, token: string, intent: (number)[]){
 		this.token = token;
+		this.clientName = clientName;
 		if(!this.token){
 			throw new Error('Token is undefined or Invalid')
 		}
@@ -39,10 +50,13 @@ export class Client{
 			this.intentValue += 2 ** intentValue;
 			if(intentValue === -1){
 				this.intentValue = 3276769;
+				console.warn('| WARNING: You are using \'ALL\' intents. Do not use ALL intent in prod!!!')
 				break;
 			}
 		}
-		console.log(this.intentValue)
+
+		this.channels = new GuildChannelCache(this);
+		this.guilds = new GuildCache(this);
 
 		this.gatewayManager = new GatewayManager(this, this.token, this.intentValue);
 		this.restManager = new RESTManager(this.token);

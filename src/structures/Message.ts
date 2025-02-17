@@ -22,7 +22,6 @@ export interface MessageContent extends MessagePayload {
 
 export class Message extends Base{
 	readonly data: any | undefined;
-	private client: Client;
 	public channel: GuildChannel;
 	public content: string | undefined;
 	public guild_id: number | undefined;
@@ -34,7 +33,7 @@ export class Message extends Base{
 	 * @param data 
 	 */
 	constructor(client:Client, channel: GuildChannel, data: any){
-		super();
+		super(client);
 		this.client = client;
 		this.channel = channel;
 		this.guild_id = data.guild_id;

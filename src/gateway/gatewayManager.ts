@@ -45,8 +45,8 @@ export class GatewayManager extends Ballister{
 				'intents': 3276799,
 				'properties': {
 					os: 'windows',
-					browser: 'BallisticDev',
-					device: 'BallisticDev'
+					browser: this.client.clientName,
+					device: this.client.clientName
 				}
 			}
 		})

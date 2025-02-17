@@ -1,7 +1,7 @@
-import { BaseGuild } from "./BaseGuild.ts";
+import { Client } from "../mod.ts";
 
-export class Guild extends BaseGuild{
-	constructor(guild_id: string){
-		super(guild_id);
+export class Guild{
+	constructor(client: Client, guild_id: string){
+		
 	}
 }

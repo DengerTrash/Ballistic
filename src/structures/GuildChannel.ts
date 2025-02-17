@@ -3,13 +3,11 @@ import { BaseChannel, Guild, MessagePayload } from "./mod.ts";
 
 export class GuildChannel extends BaseChannel{
 	private client: Client;
-	private guild: Guild;
-	public channel_id: string;
-	constructor(client: Client, guild: Guild, channel_id: string){
+	readonly channel_id: string;
+	constructor(client: Client, channel_id: string){
 		super();
 		this.client = client;
 		this.channel_id = channel_id;
-		this.guild = guild;
 	}
 	send(data: string | MessagePayload, options?: any){
 		let putData: MessagePayload = {
