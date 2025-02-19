@@ -6,7 +6,7 @@
 		"type": "node",
 		"cwd": "${workspaceFolder}",
 		"runtimeExecutable": "deno",
-		"runtimeArgs": ["--env=.env_debug", "test.ts"]
+		"runtimeArgs": ["test.ts"]
 	},
 	{
 		"name": "run this file",
@@ -14,7 +14,7 @@
 		"type": "node",
 		"cwd": "${workspaceFolder}",
 		"runtimeExecutable": "deno",
-		"runtimeArgs": ["--env=.env_debug", "${file}"]
+		"runtimeArgs": ["${file}"]
 	},
 	{
 		"args": [

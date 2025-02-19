@@ -1,11 +1,12 @@
 import { GatewayManager } from "../gateway/gatewayManager.ts";
 import { RESTManager } from "../rest/restManager.ts";
-import { CommonEvents } from "./clientEvent.ts";
+import { CommonEvents } from "./CommonEvent.ts";
 import { GuildCache, GuildChannelCache } from "../cache/mod.ts";
 import type { GatewayEvents } from "../gateway/GatewayEvents.ts";
+import { ClientEvents } from "./clientEvent.ts";
 
 type EventType<event extends keyof GatewayEvents> = GatewayEvents[event];
-interface EventRegisterPayload<Event extends keyof GatewayEvents>{
+export interface EventRegisterPayload<Event extends keyof GatewayEvents>{
 	trigger: Event;
 	execute: (event: CommonEvents) => void;
 }
@@ -17,9 +18,9 @@ export class Client{
 	//*@private */
 	private token: string | undefined;
 	//*@private */
-	private gatewayManager: GatewayManager;
+	public gatewayManager: GatewayManager;
 	//*@private */
-	private restManager: RESTManager;
+	public restManager: RESTManager;
 
 	readonly clientName: string | undefined;
 
@@ -28,6 +29,8 @@ export class Client{
 
 	private intent: (number)[] | undefined;
 	private intentValue: number | undefined;
+
+	public event: ClientEvents;
 	get gateway(){
 		return this.gatewayManager
 	}
@@ -42,6 +45,8 @@ export class Client{
 	constructor(clientName: string, token: string, intent: (number)[]){
 		this.token = token;
 		this.clientName = clientName;
+
+		this.event = new ClientEvents(this);
 		if(!this.token){
 			throw new Error('Token is undefined or Invalid')
 		}
@@ -67,7 +72,7 @@ export class Client{
 	){
 		this.gatewayManager.on(eventName,listener);
 	}
-	events<T extends keyof GatewayEvents>(data: EventRegisterPayload<T>){
+	oldEvent<T extends keyof GatewayEvents>(data: EventRegisterPayload<T>){
 		const trigger = data.trigger;
 		const execute = data.execute;
 		this.gatewayManager.on(trigger,(args) => {

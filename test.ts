@@ -8,14 +8,11 @@ const client = new Ballistic.Client(
 	]
 );
 
-client.events({
-	trigger: 'MESSAGE_CREATE',
-	execute: async(event) => {
-		const { message } = event;
-		if(message?.content != 'hello!') return
-		console.log(message?.channel)
-		await message?.reply('なんだお前')
-	}
+client.event.message_create(async(event) => {
+	const { message } = event;
+	if(message?.content != 'hello!') return
+	console.log(message?.channel)
+	await message?.reply('なんだお前')
 })
 
 client.login();

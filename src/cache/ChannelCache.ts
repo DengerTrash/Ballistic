@@ -1,6 +1,6 @@
 import type { Client } from "../mod.ts";
 import { GuildChannel } from "../structures/mod.ts";
-import { BaseCache } from "./baseCache.ts";
+import { BaseCache } from "./BaseCache.ts";
 
 export class ChannelCache extends BaseCache {
 	constructor(client: Client){
