@@ -15,4 +15,11 @@ client.event.message_create(async(event) => {
 	await message?.reply('なんだお前')
 })
 
+client.command.slash({
+	name: 'ping',
+	description: 'P I G',
+	execute: async(event) => {
+		await event.reoly('PONG')
+	}
+})
 client.login();

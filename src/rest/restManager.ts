@@ -11,31 +11,38 @@ export class RESTManager extends Ballister{
 		this.token = token
 		this.url = `${this.baseURL}/v${this.api_version}`
 	}
-	temp(url: string, method: string, args?: any){
-		const link: string = `${this.url}/${url}`;
-		fetch(link, {
+	temp(url: string, method: string, args?: any): any{
+		const link: string = `${this.url}/${url}`
+
+		interface reqPayload {
+			method: string,
+			headers: any,
+			body?: any
+		}
+		const req: reqPayload = {
 			method: method,
 			headers:{
 				Authorization: "Bot " + this.token,
 				"Content-Type": 'application/json',
 				'User-Agent': 'DiscordBot (BallisticDev 1)'
-			},
-			body: JSON.stringify(args)
-		}).then(async(res) => {
-			if(!res.ok){
-				console.error('| REST API ERROR!')
-				const caught = await res.json()
-				console.log(`|\'${caught.message}\'`)
 			}
-			if(method == 'GET'){
-				return res;
+		}
+		if(method != 'GET') req.body = JSON.stringify(args ?? {})
+		const fet = fetch(link, req)
+		fet.then(async(res) => {
+			console.log(await res.json())
+			if(!res.ok){
+				throw new Error()
+			}
+			if(method === 'GET'){
+				const caught = await res.json()
+				return caught;
 			}
 			return true
 		}).catch(e => {
-			console.error(`REST API ERROR: ${e}`)
+			console.error(`| REST API ERROR: ${e}`)
 			return false
 		})
-		return false
 	}
 	/**
 	 * /channels/[channel Id]/messagesへポストする場合に使用します。
@@ -45,11 +52,15 @@ export class RESTManager extends Ballister{
 	 * @returns true | false
 	 */
 	sendMessage(channel: string, args: MessagePayload): boolean{
-		const doit = this.temp(`/channels/${channel}/messages`, 'POST', args);
+		const doit = this.temp(`channels/${channel}/messages`, 'POST', args);
 		return doit;
 	}
 	createMessageReaction(channel: string, message: string, emoji:string){
-		const doit = this.temp(`/channels/${channel}/messages/${message}/reactions/${emoji}/@me`, 'PUT')
+		const doit = this.temp(`channels/${channel}/messages/${message}/reactions/${emoji}/@me`, 'PUT')
 		return doit;
+	}
+	getThisApp(){
+		const doit = this.temp(`applications/@me`, 'GET')
+		return doit
 	}
 }

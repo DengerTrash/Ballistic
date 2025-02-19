@@ -4,6 +4,7 @@ import { CommonEvents } from "./CommonEvent.ts";
 import { GuildCache, GuildChannelCache } from "../cache/mod.ts";
 import type { GatewayEvents } from "../gateway/GatewayEvents.ts";
 import { ClientEvents } from "./clientEvent.ts";
+import { ClientCommands } from "./ClientCommands.ts";
 
 type EventType<event extends keyof GatewayEvents> = GatewayEvents[event];
 export interface EventRegisterPayload<Event extends keyof GatewayEvents>{
@@ -24,12 +25,14 @@ export class Client{
 
 	readonly clientName: string | undefined;
 
+	
 	public channels: GuildChannelCache;
 	public guilds: GuildCache;
-
+	
 	private intent: (number)[] | undefined;
 	private intentValue: number | undefined;
-
+	
+	public command: ClientCommands;
 	public event: ClientEvents;
 	get gateway(){
 		return this.gatewayManager
@@ -37,7 +40,7 @@ export class Client{
 	get rest(){
 		return this.restManager
 	}
-
+	
 	/**
 	 * A Discord bot client.
 	 * @param token 
@@ -46,7 +49,6 @@ export class Client{
 		this.token = token;
 		this.clientName = clientName;
 
-		this.event = new ClientEvents(this);
 		if(!this.token){
 			throw new Error('Token is undefined or Invalid')
 		}
@@ -59,7 +61,10 @@ export class Client{
 				break;
 			}
 		}
-
+		
+		this.event = new ClientEvents(this);
+		this.command = new ClientCommands(this);
+		
 		this.channels = new GuildChannelCache(this);
 		this.guilds = new GuildCache(this);
 
