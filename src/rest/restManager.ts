@@ -6,10 +6,12 @@ export class RESTManager extends Ballister{
 	public baseURL: string = 'https://discord.com/api';
 	public api_version: number = 10
 	public url: string
+	public appData : any;
 	constructor(token: string){
 		super();
 		this.token = token
 		this.url = `${this.baseURL}/v${this.api_version}`
+		this.appData = this.getThisApp()
 	}
 	temp(url: string, method: string, args?: any): any{
 		const link: string = `${this.url}/${url}`
