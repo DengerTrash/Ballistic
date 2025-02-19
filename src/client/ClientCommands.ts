@@ -7,7 +7,10 @@ export class ClientCommands {
         this.client = client
     }
     slash(data: CommandPayload){
-        this.client.restManager.
-        this.client.gatewayManager.on('INTERACTION_CREATE',data.execute)
+        this.client.restManager
+        this.client.gatewayManager.on('INTERACTION_CREATE',(event) =>{
+            if(event)
+            data.execute
+        })
     }
 }

@@ -34,6 +34,8 @@ export class Client{
 	
 	public command: ClientCommands;
 	public event: ClientEvents;
+
+	public appId: string | undefined;
 	get gateway(){
 		return this.gatewayManager
 	}
@@ -85,7 +87,9 @@ export class Client{
 			execute(common);
 		})
 	}
-	login(){
+	async login(){
+		this.appId = await this.restManager.getThisApp()
+		console.log(await this.rest.GetSlashCommand())
 		this.gatewayManager.connect();
 	}
 }
