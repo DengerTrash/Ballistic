@@ -88,7 +88,6 @@ export class Client{
 		})
 	}
 	async login(){
-		this.appId = await this.restManager.getThisApp()
 		console.log(await this.rest.GetSlashCommand())
 		this.gatewayManager.connect();
 	}

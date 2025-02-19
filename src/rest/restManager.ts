@@ -15,12 +15,6 @@ export class RESTManager extends Ballister{
 		super();
 		this.token = token
 		this.url = `${this.baseURL}/v${this.api_version}`
-		this.appId = this.getThisApp()
-	}
-	async getAppId(){
-		const dat = await this.getThisApp()
-		const res = await dat.json()
-		return res.id;
 	}
 	temp(url: string, method: string, args?: any): any{
 		const link: string = `${this.url}/${url}`
@@ -60,8 +54,10 @@ export class RESTManager extends Ballister{
 			}
 		}
 		const resp = await fetch(link, req)
-		if(!resp.ok) console.error(`|RESTAPI ERROR: ${resp}`)
 		const resJson = await resp.json()
+		if(!resp.ok){
+			if(resJson.code != 0) console.error(`|RESTAPI ERROR: ${resJson}`);
+		}
 		return resJson
 	}
 	/**
@@ -79,12 +75,15 @@ export class RESTManager extends Ballister{
 		const doit = this.temp(`channels/${channel}/messages/${message}/reactions/${emoji}/@me`, 'PUT')
 		return doit;
 	}
-	async getThisApp(){
+	async getThisApp(): Promise<string>{
 		const doit = await this.getTemp(`applications/@me`)
-		this.appId = doit.id;
-		return doit.id
+		return doit
 	}
 	async GetSlashCommand(){
+		if(!this.appId){
+			const pur = await this.getThisApp()
+			this.appId = pur;
+		}
 		const doit = await this.getTemp(`applications/${this.appId}/commmands`)
 		return doit;
 	}
