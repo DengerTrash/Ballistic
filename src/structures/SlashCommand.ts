@@ -9,9 +9,14 @@ export class SlashCommand extends BaseCommand {
     }
 }
 export class SlashCommandEvents extends CommonEvents {
+    private token: string;
+    private id: string;
     constructor(event: string, client: Client, data: any){
         super(event, client, data);
+        this.token = data.token;
+        this.id = data.id
     }
-    followup(message: MessagePayload){
+    followUp(message: MessagePayload){
+        this.client.restManager.InteractionFollowUp(4, this.id, this.token, message)
     }
 }

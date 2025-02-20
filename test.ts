@@ -19,7 +19,9 @@ client.command.slash({
 	name: 'ping',
 	description: 'P I G',
 	execute: async(event) => {
-		await event.guildChannel?.send('fuck')
+		await event.followUp({
+			content: 'fuck'
+		})
 	}
 })
 client.login();

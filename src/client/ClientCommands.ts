@@ -1,5 +1,6 @@
 import { Client, CommonEvents } from "../mod.ts";
 import { CommandPayload, CommandStructure } from "../structures/BaseCommand.ts";
+import { SlashCommandEvents } from "../structures/SlashCommand.ts";
 
 export class ClientCommands {
     public client: Client;
@@ -12,7 +13,7 @@ export class ClientCommands {
             //if(event.application_id != this.client.restManager.appId) return;
             if(event.data.type != 1) return;
             if(event.data.name != data.name) return;
-            const ce = new CommonEvents('INTERACTION_CREATE', this.client, event)
+            const ce = new SlashCommandEvents('INTERACTION_CREATE', this.client, event)
             data.execute(ce)
         })
     }

@@ -1,11 +1,12 @@
 import { Client, CommonEvents } from "../mod.ts";
 import { Base } from "./mod.ts";
+import { SlashCommandEvents } from "./SlashCommand.ts";
 
 export interface CommandPayload {
 	name: string,
 	onlyGuild?: (string)[],
 	description: string,
-	execute: (event: CommonEvents) => Promise<void>
+	execute: (event: SlashCommandEvents) => Promise<void>
 }
 export interface CommandStructure extends Omit<CommandPayload, 'execute'> {
 }
