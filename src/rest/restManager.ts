@@ -100,6 +100,16 @@ export class RESTManager extends Ballister{
 			console.error(`|Regist Command ERROR: ${e}`)
 		}
 	}
+	async webHookPostFollowUp(type: number, massage: MessagePayload){
+		await this.detectId()
+		const payload = {
+			type: 1,
+			data: {}
+		}
+		payload.type = type;
+		payload.data = massage
+		const doit = await this.temp(`webhooks/${this.appId}/${Deno.env.get('TOKEN')}`, "POST", payload)
+	}
 	async createMessageReaction(channel: string, message: string, emoji:string){
 		const doit = await this.temp(`channels/${channel}/messages/${message}/reactions/${emoji}/@me`, 'PUT')
 		return doit;
