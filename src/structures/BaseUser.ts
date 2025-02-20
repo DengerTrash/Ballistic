@@ -1,4 +1,4 @@
-import { Client } from "../mod.ts";
+import type { Client } from "../mod.ts";
 import { Base } from "./Base.ts";
 
 export interface BaseUserStructure {
@@ -21,6 +21,9 @@ export interface BaseUserStructure {
 	avatar_decoration_data?: string
 }
 
+/**
+ * User用のBaseです。現在未使用です。
+ */
 export class BaseUser extends Base{
 	constructor(client: Client){
 		super(client)

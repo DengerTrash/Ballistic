@@ -1,12 +1,16 @@
-import { Client } from "../mod.ts";
+import type { Client } from "../mod.ts";
 import { Base } from "./Base.ts";
+
 
 export interface BaseChannelStructure {
 	id: any
 	type: number
 }
 
-export class BaseChannel extends Base{
+/**
+ * チャンネルのベースです。現状では特別なことはありません。
+ */
+export abstract class BaseChannel extends Base{
 	constructor(client: Client){
 		super(client)
 	}
