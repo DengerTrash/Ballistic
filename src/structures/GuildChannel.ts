@@ -4,7 +4,7 @@ import { BaseChannel, Guild, MessagePayload } from "./mod.ts";
 export class GuildChannel extends BaseChannel{
 	readonly channel_id: string;
 	constructor(client: Client, channel_id: string){
-		super();
+		super(client);
 		this.client = client;
 		this.channel_id = channel_id;
 	}
@@ -15,7 +15,7 @@ export class GuildChannel extends BaseChannel{
 		if(typeof data == 'string') putData.content = data
 		else putData = data
 
-		if(options.reply){
+		if(options){
 			console.log(options.reply)
 			putData.message_reference = options.reply
 		}

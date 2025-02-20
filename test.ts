@@ -19,7 +19,7 @@ client.command.slash({
 	name: 'ping',
 	description: 'P I G',
 	execute: async(event) => {
-		await event.reoly('PONG')
+		await event.guildChannel?.send('fuck')
 	}
 })
 client.login();

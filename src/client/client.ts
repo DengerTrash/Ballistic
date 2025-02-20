@@ -87,8 +87,7 @@ export class Client{
 			execute(common);
 		})
 	}
-	async login(){
-		console.log(await this.rest.GetSlashCommand())
+	login(){
 		this.gatewayManager.connect();
 	}
 }

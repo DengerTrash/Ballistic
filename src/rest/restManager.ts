@@ -1,3 +1,4 @@
+import { CommandPayload, CommandStructure } from "../structures/BaseCommand.ts";
 import { MessagePayload } from "../structures/mod.ts";
 import Ballister from "../util/event.ts";
 interface reqPayload {
@@ -10,13 +11,29 @@ export class RESTManager extends Ballister{
 	public baseURL: string = 'https://discord.com/api';
 	public api_version: number = 10
 	public url: string
-	public appId: any;
+	public appId: string | undefined;
 	constructor(token: string){
 		super();
 		this.token = token
 		this.url = `${this.baseURL}/v${this.api_version}`
+		this.detectId()
 	}
-	temp(url: string, method: string, args?: any): any{
+	async detectId(){
+		if(!this.appId){
+			const res = await fetch(`${this.url}/applications/@me`,{
+				headers:{
+					Authorization: "Bot "+ this.token,
+					"Content-Type": 'application/json',
+					'User-Agent': 'DiscordBot (BallisticDev 1)'
+				}
+			})
+			const jj = await res.json()
+			this.appId = jj.id;
+		}
+	}
+	async temp(url: string, method: string, args?: any): Promise<any>{
+		await this.detectId();
+
 		const link: string = `${this.url}/${url}`
 
 		const req: reqPayload = {
@@ -29,9 +46,10 @@ export class RESTManager extends Ballister{
 		}
 		if(method != 'GET') req.body = JSON.stringify(args ?? {})
 		fetch(link, req).then(async(res) => {
-			console.log('THEN')
 			if(!res.ok){
-				throw new Error()
+				const er = await res.json()
+				console.dir(er.errors)
+				throw new Error(er.message)
 			}
 			if(method === 'GET'){
 				const caught = await res.json()
@@ -40,10 +58,10 @@ export class RESTManager extends Ballister{
 			return true
 		}).catch(e => {
 			console.error(`| REST API ERROR: ${e}`)
-			return false
 		})
 	}
 	async getTemp(url: string){
+		this.detectId()
 		const link: string = `${this.url}/${url}`
 		const req:reqPayload = {
 			method: 'GET',
@@ -56,7 +74,7 @@ export class RESTManager extends Ballister{
 		const resp = await fetch(link, req)
 		const resJson = await resp.json()
 		if(!resp.ok){
-			if(resJson.code != 0) console.error(`|RESTAPI ERROR: ${resJson}`);
+			if(resJson.code != 0) console.error(`| REST API ERROR: ${resJson}`);
 		}
 		return resJson
 	}
@@ -67,23 +85,26 @@ export class RESTManager extends Ballister{
 	 * @param args 
 	 * @returns true | false
 	 */
-	sendMessage(channel: string, args: MessagePayload): boolean{
-		const doit = this.temp(`channels/${channel}/messages`, 'POST', args);
+	async sendMessage(channel: string, args: MessagePayload): Promise<boolean>{
+		const doit = await this.temp(`channels/${channel}/messages`, 'POST', args);
 		return doit;
 	}
-	createMessageReaction(channel: string, message: string, emoji:string){
-		const doit = this.temp(`channels/${channel}/messages/${message}/reactions/${emoji}/@me`, 'PUT')
-		return doit;
+	async registSlashCommand(data: CommandPayload){
+		await this.detectId();
+		try{
+			const dat:CommandStructure = data
+			const doit = await this.temp(`applications/${this.appId}/commands`,'POST',dat)
+			console.log(`| Registed Slash command "${data.name}".`);
+			return doit;
+		}catch(e){
+			console.error(`|Regist Command ERROR: ${e}`)
+		}
 	}
-	async getThisApp(): Promise<string>{
-		const doit = await this.getTemp(`applications/@me`)
-		return doit
+	async createMessageReaction(channel: string, message: string, emoji:string){
+		const doit = await this.temp(`channels/${channel}/messages/${message}/reactions/${emoji}/@me`, 'PUT')
+		return doit;
 	}
 	async GetSlashCommand(){
-		if(!this.appId){
-			const pur = await this.getThisApp()
-			this.appId = pur;
-		}
 		const doit = await this.getTemp(`applications/${this.appId}/commmands`)
 		return doit;
 	}

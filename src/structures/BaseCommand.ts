@@ -1,26 +1,23 @@
-import { Client } from "../mod.ts";
+import { Client, CommonEvents } from "../mod.ts";
 import { Base } from "./mod.ts";
 
 export interface CommandPayload {
 	name: string,
 	onlyGuild?: (string)[],
 	description: string,
-	execute: (event: any) => Promise<void>
+	execute: (event: CommonEvents) => Promise<void>
 }
-export interface CommandStructure extends CommandPayload {
-	type: number;
+export interface CommandStructure extends Omit<CommandPayload, 'execute'> {
 }
-export abstract class BaseCommand extends Base implements CommandPayload {
+export abstract class BaseCommand extends Base implements CommandStructure {
 	readonly name: string;
 	readonly onlyGuild: string[] | undefined;
 	readonly description: string;
-	readonly execute: (event: any) => Promise<void>;
-	constructor(client: Client, data: CommandStructure){
+	constructor(client: Client, data: CommandPayload){
 		super(client);
 		this.name = data.name;
 		this.onlyGuild = data.onlyGuild;
 		this.description = data.description
-		this.execute = data.execute
 	}
 	
 }
