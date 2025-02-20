@@ -1,6 +1,6 @@
-import { CommandPayload, CommandStructure } from "../structures/BaseCommand.ts";
-import { MessagePayload } from "../structures/mod.ts";
-import Ballister from "../util/event.ts";
+import { CommandPayload, CommandStructure } from "../../structures/command/Command.ts";
+import { MessagePayload } from "../../structures/mod.ts";
+import Ballister from "../../util/event.ts";
 interface reqPayload {
 	method: string,
 	headers: any,

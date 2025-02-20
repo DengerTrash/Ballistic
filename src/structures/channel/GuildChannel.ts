@@ -1,5 +1,5 @@
-import type { Client } from "../mod.ts";
-import { BaseChannel, type MessagePayload } from "./mod.ts";
+import type { Client } from "../../mod.ts";
+import { BaseChannel, type MessagePayload } from "../mod.ts";
 
 /**
  * ギルドチャンネル用のChannelです。

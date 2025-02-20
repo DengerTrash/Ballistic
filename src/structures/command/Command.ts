@@ -1,6 +1,6 @@
-import type { Client } from "../mod.ts";
-import { Base } from "./mod.ts";
-import type { SlashCommandEvents } from "./SlashCommand.ts";
+import type { Client } from "../../mod.ts";
+import { Base } from "../mod.ts";
+import type { SlashCommandEvents } from "../SlashCommand.ts";
 
 /**
  * slash等のメソッド用のinterfaceです。

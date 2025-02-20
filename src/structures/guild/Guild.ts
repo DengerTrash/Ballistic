@@ -1,4 +1,4 @@
-import type { Client } from "../mod.ts";
+import type { Client } from "../../mod.ts";
 
 /**
  * とりあえず作った。文句あっか。

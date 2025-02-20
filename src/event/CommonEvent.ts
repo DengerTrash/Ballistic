@@ -1,6 +1,6 @@
 import { channel } from "node:diagnostics_channel";
 import type { Client } from "../mod.ts";
-import { BaseUserStructure } from "../structures/BaseUser.ts";
+import { BaseUserStructure } from "../structures/user/User.ts";
 import { Guild, GuildChannel, Message, MessageContent } from "../structures/mod.ts";
 
 export interface AnyEventPayload extends MessageContent {

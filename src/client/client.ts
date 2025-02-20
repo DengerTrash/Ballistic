@@ -1,5 +1,5 @@
 import { GatewayManager } from "../gateway/gatewayManager.ts";
-import { RESTManager } from "../rest/restManager.ts";
+import { RESTManager } from "../endpoints/rest/restManager.ts";
 import { CommonEvents } from "./CommonEvent.ts";
 import { GuildCache, GuildChannelCache } from "../cache/mod.ts";
 import type { GatewayEvents } from "../gateway/GatewayEvents.ts";

@@ -1,5 +1,5 @@
 import { Client, CommonEvents } from "../mod.ts";
-import { BaseCommand, CommandPayload, CommandStructure} from "./BaseCommand.ts";
+import { BaseCommand, CommandPayload, CommandStructure} from "./command/Command.ts";
 import { MessagePayload } from "./mod.ts";
 
 export class SlashCommand extends BaseCommand {

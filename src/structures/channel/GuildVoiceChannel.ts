@@ -1,6 +1,6 @@
-import { Client } from "../mod.ts";
-import { BaseChannel } from "./BaseChannel.ts";
-import { MessagePayload } from "./mod.ts";
+import { Client } from "../../mod.ts";
+import { BaseChannel } from "./Channel.ts";
+import { MessagePayload } from "../mod.ts";
 
 export class GuildVoiceChannel extends BaseChannel{
 	public guild_id: string;

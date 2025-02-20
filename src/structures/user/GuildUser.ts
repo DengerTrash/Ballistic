@@ -1,5 +1,5 @@
-import type { Client } from "../mod.ts";
-import { BaseUser } from "./BaseUser.ts";
+import type { Client } from "../../mod.ts";
+import { BaseUser } from "./User.ts";
 
 /**
  * ユーザーのうち、ギルド用のユーザーに絞ったものです。

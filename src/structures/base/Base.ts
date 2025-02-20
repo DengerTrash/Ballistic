@@ -1,4 +1,4 @@
-import type { Client } from "../mod.ts";
+import type { Client } from "../../mod.ts";
 
 /**
  * 全ての礎。

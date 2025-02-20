@@ -1,5 +1,5 @@
-import type { Client } from "../mod.ts";
-import { Base } from "./Base.ts";
+import type { Client } from "../../mod.ts";
+import { Base } from "../base/Base.ts";
 
 export interface BaseUserStructure {
 	id: string,
