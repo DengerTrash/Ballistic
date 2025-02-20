@@ -1,6 +1,6 @@
 //Thanks harmony!
-import type { Client } from "../client/client.ts"
-import Ballister from "../util/event.ts"
+import type { Client } from "../../client/Client.ts"
+import Ballister from "../../util/event.ts"
 
 export interface WebSocketResponse {
 	op: number,

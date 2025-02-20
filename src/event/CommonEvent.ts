@@ -1,6 +1,4 @@
-import { channel } from "node:diagnostics_channel";
 import type { Client } from "../mod.ts";
-import { BaseUserStructure } from "../structures/user/User.ts";
 import { Guild, GuildChannel, Message, MessageContent } from "../structures/mod.ts";
 
 export interface AnyEventPayload extends MessageContent {
@@ -16,8 +14,6 @@ export class CommonEvents {
 		this.client = client;
 		if(data.channel_id) this.guildChannel = client.channels.access(data.channel_id);
 		if(data.guild_id) this.guild = client.guilds.access(data.guild_id);
-		if(event == 'MESSAGE_CREATE' || event == 'INTERACTION_CREATE') this.message = new Message(client, this.guildChannel!, data)
-		
-		console.log(this.message)
+		if(event == 'MESSAGE_CREATE' || event == 'INTERACTION_CREATE') this.message = new Message(client, this.guildChannel!, data)		
 	}
 }

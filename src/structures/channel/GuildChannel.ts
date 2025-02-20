@@ -1,10 +1,10 @@
 import type { Client } from "../../mod.ts";
-import { BaseChannel, type MessagePayload } from "../mod.ts";
+import { Channel, type MessagePayload } from "../mod.ts";
 
 /**
  * ギルドチャンネル用のChannelです。
  */
-export class GuildChannel extends BaseChannel{
+export class GuildChannel extends Channel{
 	readonly channel_id: string;
 
 	/**

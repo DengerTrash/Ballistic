@@ -1,13 +1,17 @@
-import type { Client } from "../mod.ts";
-import { GuildChannel } from "../structures/mod.ts";
-import { BaseCache } from "./BaseCache.ts";
+import type { Client } from "../../mod.ts";
+import { GuildChannel } from "../mod.ts";
+import { Cache } from "../base/mod.ts";
 
-export class ChannelCache extends BaseCache {
+
+export class ChannelCache extends Cache {
 	constructor(client: Client){
 		super(client);
 	}
 }
 
+/**
+ * ギルドチャンネル用のキャッシュです。
+ */
 export class GuildChannelCache extends ChannelCache{
 	constructor(client: Client){
 		super(client)

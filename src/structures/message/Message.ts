@@ -1,6 +1,6 @@
 import type { Client } from "../../mod.ts";
 import type { GuildChannel } from '../mod.ts'
-import { Base } from "../base/Base.ts";
+import { Base } from "../base/mod.ts";
 
 export interface MessagePayload {
 	content: string,

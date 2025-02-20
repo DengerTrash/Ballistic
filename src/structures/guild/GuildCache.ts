@@ -1,8 +1,8 @@
-import type { Client } from "../mod.ts";
-import { Guild } from "../structures/mod.ts";
-import { BaseCache } from "./BaseCache.ts";
+import type { Client } from "../../mod.ts";
+import { Guild } from "./mod.ts";
+import { Cache } from "../base/mod.ts";
 
-export class GuildCache extends BaseCache{
+export class GuildCache extends Cache{
 	constructor(client: Client){
 		super(client)
 	}

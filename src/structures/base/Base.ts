@@ -4,7 +4,7 @@ import type { Client } from "../../mod.ts";
  * 全ての礎。
  * BASE.
  */
-export class Base{
+export abstract class Base {
 	public client: Client;
 	/**
 	 * 

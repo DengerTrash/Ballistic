@@ -1,8 +1,9 @@
-import { Client, CommonEvents } from "../mod.ts";
-import { BaseCommand, CommandPayload, CommandStructure} from "./command/Command.ts";
-import { MessagePayload } from "./mod.ts";
+import { CommonEvents } from "../../event/CommonEvent.ts";
+import { Command, type CommandPayload } from "./Command.ts";
+import type { MessagePayload } from "../mod.ts";
+import type { Client } from "../../mod.ts";
 
-export class SlashCommand extends BaseCommand {
+export class SlashCommand extends Command {
     constructor(client: Client, data: CommandPayload){
         const datt: CommandPayload = data;
         super(client, datt)

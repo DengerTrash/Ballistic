@@ -1,12 +1,24 @@
-import { Client, CommonEvents } from "../mod.ts";
+import { Client } from "../mod.ts";
 import { CommandPayload, CommandStructure } from "../structures/command/Command.ts";
-import { SlashCommandEvents } from "../structures/SlashCommand.ts";
+import { SlashCommandEvents } from "../structures/command/SlashCommand.ts";
 
+/**
+ * クライアントにコマンドを登録するためのサブクラスです。
+ */
 export class ClientCommands {
     public client: Client;
+    /**
+     * クライアントのサブクラスですもの。そりゃいるよね。
+     * @param client 
+     */
     constructor(client: Client){
         this.client = client
     }
+
+    /**
+     * スラッシュコマンドを登録します。
+     * @param data 
+     */
     async slash(data: CommandPayload){
         await this.client.restManager.registSlashCommand(data);
         this.client.gatewayManager.on('INTERACTION_CREATE',(event) => {

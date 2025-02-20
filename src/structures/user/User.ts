@@ -24,7 +24,7 @@ export interface BaseUserStructure {
 /**
  * User用のBaseです。現在未使用です。
  */
-export class BaseUser extends Base{
+export class User extends Base{
 	constructor(client: Client){
 		super(client)
 	}

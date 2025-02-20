@@ -1,5 +1,5 @@
 import type { Client } from "../../mod.ts";
-import { Base } from "../base/Base.ts";
+import { Base } from "../base/mod.ts";
 
 
 export interface BaseChannelStructure {
@@ -10,7 +10,7 @@ export interface BaseChannelStructure {
 /**
  * チャンネルのベースです。現状では特別なことはありません。
  */
-export abstract class BaseChannel extends Base{
+export abstract class Channel extends Base{
 	constructor(client: Client){
 		super(client)
 	}

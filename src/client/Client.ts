@@ -1,9 +1,8 @@
-import { GatewayManager } from "../gateway/gatewayManager.ts";
-import { RESTManager } from "../endpoints/rest/restManager.ts";
-import { CommonEvents } from "./CommonEvent.ts";
-import { GuildCache, GuildChannelCache } from "../cache/mod.ts";
-import type { GatewayEvents } from "../gateway/GatewayEvents.ts";
-import { ClientEvents } from "./clientEvent.ts";
+import { type GatewayEvents, GatewayManager, RESTManager } from "../endpoints/mod.ts";
+import { ClientEvents } from "../event/clientEvent.ts";
+import { CommonEvents } from "../event/CommonEvent.ts";
+import { GuildCache } from "../structures/guild/mod.ts";
+import { GuildChannelCache } from "../structures/mod.ts";
 import { ClientCommands } from "./ClientCommands.ts";
 
 type EventType<event extends keyof GatewayEvents> = GatewayEvents[event];
@@ -87,6 +86,9 @@ export class Client{
 			execute(common);
 		})
 	}
+	/**
+	 * Login client.
+	 */
 	login(){
 		this.gatewayManager.connect();
 	}

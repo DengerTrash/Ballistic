@@ -1,6 +1,6 @@
 import type { Client } from "../../mod.ts";
 import { Base } from "../mod.ts";
-import type { SlashCommandEvents } from "../SlashCommand.ts";
+import type { SlashCommandEvents } from "./SlashCommand.ts";
 
 /**
  * slash等のメソッド用のinterfaceです。
@@ -19,7 +19,7 @@ export interface CommandStructure extends Omit<CommandPayload, 'execute'> {
 /**
  * コマンドのベースです。
  */
-export abstract class BaseCommand extends Base implements CommandStructure {
+export abstract class Command extends Base implements CommandStructure {
 	readonly name: string;
 	readonly onlyGuild: string[] | undefined;
 	readonly description: string;
