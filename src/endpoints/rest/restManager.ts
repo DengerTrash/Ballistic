@@ -94,7 +94,7 @@ export class RESTManager extends Ballister{
 		try{
 			const dat:CommandStructure = data
 			const doit = await this.temp(`applications/${this.appId}/commands`,'POST',dat)
-			console.log(`| Registed Slash command "${data.name}".`);
+			console.log(`| Registing Slash command "${data.name}".`);
 			return doit;
 		}catch(e){
 			console.error(`|Regist Command ERROR: ${e}`)

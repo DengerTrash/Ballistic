@@ -79,15 +79,14 @@ export class GatewayManager extends Ballister{
 				this.sendId()
 				this.heartbeat_interval = d.heartbeat_interval
 				this.sequence_number = s ?? null
-				console.log('| HELLO, Ballistic!')
-				console.log(`| heartbeat_interval is ${this.heartbeat_interval}.`)
+				console.log('| WebSocket connected')
 				setInterval(this.heartbeat.bind(this), this.heartbeat_interval!)
 
 				break
 			}
 			case 11: {
 				this.isHeartbeatSend = true
-				console.log('| heartbeat ok')
+				console.log('| Heartbeat ok')
 				break
 			}
 			default: {
@@ -117,7 +116,6 @@ export class GatewayManager extends Ballister{
 		const payload = {
 			op: 4,
 			d: {
-				guild_id: guild,
 				channel_id: channel,
 				self_mute: self_mute,
 				self_deaf: self_deaf
