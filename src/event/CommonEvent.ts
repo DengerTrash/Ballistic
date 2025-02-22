@@ -14,6 +14,6 @@ export class CommonEvents {
 		this.client = client;
 		if(data.channel_id) this.guildChannel = client.channels.access(data.channel_id);
 		if(data.guild_id) this.guild = client.guilds.access(data.guild_id);
-		if(event == 'MESSAGE_CREATE' || event == 'INTERACTION_CREATE') this.message = new Message(client, this.guildChannel!, data)		
+		if(event == 'MESSAGE_CREATE' || event == 'INTERACTION_CREATE') this.message = new Message(client, data)		
 	}
 }

@@ -77,7 +77,7 @@ export class Client{
 		this.guilds = new GuildCache(this);
 
 		this.gatewayManager = new GatewayManager(this, this.token, this.intentValue);
-		this.restManager = new RESTManager(this.token);
+		this.restManager = new RESTManager(this, this.token);
 	}
 	/**
 	 * Login client.

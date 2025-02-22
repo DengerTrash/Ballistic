@@ -1,6 +1,8 @@
+import { Client } from "../../mod.ts";
 import { CommandPayload, CommandStructure } from "../../structures/command/Command.ts";
-import { Message, MessagePayload } from "../../structures/mod.ts";
+import { Message, MessageContent, MessageGetPayload, MessagePayload } from "../../structures/mod.ts";
 import Ballister from "../../util/event.ts";
+import { MessageRESTManager } from "./mod.ts";
 interface reqPayload {
 	method: string,
 	headers: any,
@@ -12,8 +14,14 @@ export class RESTManager extends Ballister{
 	public api_version: number = 10
 	public url: string
 	public appId: string | undefined;
-	constructor(token: string){
+
+	private message: MessageRESTManager
+	client: Client;
+	
+	constructor(client: Client,token: string){
 		super();
+		this.client = client;
+		this.message = new MessageRESTManager()
 		this.token = token
 		this.url = `${this.baseURL}/v${this.api_version}`
 		this.detectId()
@@ -119,8 +127,18 @@ export class RESTManager extends Ballister{
 		const doit = await this.getTemp(`applications/${this.appId}/commmands`)
 		return doit;
 	}
-	async GetChannelMessages(channelId: string){
-		const doit = await this.getTemp(`channels/${channelId}/messages`)
-		return doit as (Message)[];
+	async GetChannelMessages(channelId: string, args?: MessageGetPayload){
+		const limit: number = args?.limit ?? 50;
+		const doit: (MessageContent)[] = await this.getTemp(`channels/${channelId}/messages?limit=${limit}`)
+		
+		const res: (Message)[] = [];
+		doit.forEach(mes => {
+			if(args?.user_id && mes.author.id != args.user_id) return;
+			
+			const passedMessage = new Message(this.client,mes);
+			res.push(passedMessage);
+		});
+		return res;
 	}
+	
 }

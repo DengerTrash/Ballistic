@@ -9,7 +9,7 @@ export class GuildUser extends User{
 	 * Baseベースなのでclientが必要です。
 	 * @param client 
 	 */
-	constructor(client: Client){
-		super(client)
+	constructor(client: Client,data: any){
+		super(client,data)
 	}
 }

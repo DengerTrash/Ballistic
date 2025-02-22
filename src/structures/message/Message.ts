@@ -1,5 +1,5 @@
 import type { Client } from "../../mod.ts";
-import type { GuildChannel } from '../mod.ts'
+import type { GuildChannel, User } from '../mod.ts'
 import { Base } from "../base/mod.ts";
 
 export interface MessagePayload {
@@ -17,7 +17,13 @@ export interface MessagePayload {
 export type sendMessageType = string | MessagePayload;
 
 export interface MessageContent extends MessagePayload {
-	channel_id: string
+	author: User;
+	channel_id: string;
+}
+
+export interface MessageGetPayload {
+	user_id?: string,
+	limit?: number
 }
 
 export class Message extends Base{
@@ -32,13 +38,14 @@ export class Message extends Base{
 	 * @param channel 
 	 * @param data 
 	 */
-	constructor(client:Client, channel: GuildChannel, data: any){
+	constructor(client:Client, data: any){
 		super(client);
 		this.client = client;
-		this.channel = channel;
 		this.guild_id = data.guild_id;
 		this.data = data;
 		this.content = data.content
+
+		this.channel = this.client.channels.access(data.channel_id);
 	}
 	reply(content: string | MessagePayload){
 		this.channel.send(content,{

@@ -3,11 +3,9 @@ import { Channel } from "./mod.ts";
 
 export class GuildVoiceChannel extends Channel{
 	public guild_id: string;
-	public channel_id: string;
 	constructor(client: Client, guild_id: string, channel_id: string){
-		super(client);
+		super(client, channel_id);
 		this.client = client;
-		this.channel_id = channel_id;
 		this.guild_id = guild_id;
 	}
 	/**

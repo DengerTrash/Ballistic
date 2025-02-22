@@ -24,8 +24,30 @@ export interface BaseUserStructure {
 /**
  * User用のBaseです。現在未使用です。
  */
-export class User extends Base{
-	constructor(client: Client){
+export class User extends Base implements BaseUserStructure{
+	id: string;
+	username: string;
+	descriminator: string;
+	global_name: string;
+	avatar: string;
+	bot?: boolean | undefined;
+	system?: boolean | undefined;
+	mfa_enabled?: boolean | undefined;
+	banner?: string | undefined;
+	accent_color?: string | undefined;
+	locale?: string | undefined;
+	verified?: boolean | undefined;
+	email?: string | undefined;
+	flags?: string | undefined;
+	premium_type?: string | undefined;
+	public_flags?: string | undefined;
+	avatar_decoration_data?: string | undefined;
+	constructor(client: Client, data: BaseUserStructure){
 		super(client)
+		this.id = data.id;
+		this.username = data.username;
+		this.descriminator = data.descriminator;
+		this.global_name = data.global_name;
+		this.avatar = data.avatar;
 	}
 }

@@ -1,21 +1,21 @@
 import type { Client } from "../../mod.ts";
-import { Channel, Message, type MessagePayload } from "../mod.ts";
+import { Channel, type Message, type MessageGetPayload, type MessagePayload } from "../mod.ts";
+import { BaseChannelStructure } from "./mod.ts";
 
 /**
  * ギルドチャンネル用のChannelです。
  */
 export class GuildChannel extends Channel{
-	readonly channel_id: string;
 
 	/**
 	 * チャンネルIDを指定しればとりあえずできます。
 	 * @param client 
 	 * @param channel_id 
 	 */
-	constructor(client: Client, channel_id: string){
-		super(client);
+	constructor(client: Client, channel_id: string, structure?: Omit<BaseChannelStructure, 'id'>){
+		super(client,channel_id);
 		this.client = client;
-		this.channel_id = channel_id;
+		
 	}
 	/**
 	 * 指定したチャンネルにメッセージを送信します。
@@ -36,8 +36,9 @@ export class GuildChannel extends Channel{
 		this.client.rest.sendMessage(this.channel_id, putData)
 	}
 
-	async get(state?: string, enzansi?: string, equal?: any): Promise<(Message)[]>{
-		const res = await this.client.rest.GetChannelMessages(this.channel_id)
+	async get(args?: MessageGetPayload): Promise<(Message)[]>{
+		const res = await this.client.rest.GetChannelMessages(this.channel_id, args)
+
 		return res;
 	}
 }
