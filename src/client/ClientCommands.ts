@@ -22,7 +22,7 @@ export class ClientCommands {
     async slash(data: CommandPayload){
         await this.client.restManager.registSlashCommand(data);
         this.client.gatewayManager.on('INTERACTION_CREATE',(event) => {
-            //if(event.application_id != this.client.restManager.appId) return;
+            if(event.application_id != this.client.restManager.appId) return;
             if(event.data.type != 1) return;
             if(event.data.name != data.name) return;
             const ce = new SlashCommandEvents('INTERACTION_CREATE', this.client, event)

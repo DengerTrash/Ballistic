@@ -1,5 +1,5 @@
 import { CommandPayload, CommandStructure } from "../../structures/command/Command.ts";
-import { MessagePayload } from "../../structures/mod.ts";
+import { Message, MessagePayload } from "../../structures/mod.ts";
 import Ballister from "../../util/event.ts";
 interface reqPayload {
 	method: string,
@@ -118,5 +118,9 @@ export class RESTManager extends Ballister{
 	async GetSlashCommand(){
 		const doit = await this.getTemp(`applications/${this.appId}/commmands`)
 		return doit;
+	}
+	async GetChannelMessages(channelId: string){
+		const doit = await this.getTemp(`channels/${channelId}/messages`)
+		return doit as (Message)[];
 	}
 }

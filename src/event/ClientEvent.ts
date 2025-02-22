@@ -1,4 +1,4 @@
-import { CommonEvents } from "./CommonEvent.ts";
+import { CommonEvents } from "./mod.ts";
 import type { GatewayEvents } from "../endpoints/mod.ts"
 import type { Client, EventRegisterPayload } from "../mod.ts";
 

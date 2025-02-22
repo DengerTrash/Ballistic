@@ -32,6 +32,9 @@ export class GatewayManager extends Ballister{
 	public connect(){
 		this.initWebSocket()
 	}
+	public disconnect(){
+		this.websocket?.close();
+	}
 	protected initWebSocket() {
 		this.websocket = new WebSocket(`wss://gateway.discord.gg/?v=${this.api_version}&enchoding=json`)
 		this.websocket.onopen = this.onopen.bind(this)
