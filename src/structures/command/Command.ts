@@ -8,8 +8,19 @@ import type { SlashCommandEvents } from "./SlashCommand.ts";
 export interface CommandPayload {
 	name: string,
 	onlyGuild?: (string)[],
+	option?:(CommandOption)[]
 	description: string,
 	execute: (event: SlashCommandEvents) => Promise<void>
+}
+
+export const CommandOptionType = {
+	subCommand: '1',
+}
+const nk: CommandOption = {
+	type: 'subCommand'
+}
+export interface CommandOption {
+	type: (typeof CommandOptionType)[keyof typeof CommandOptionType]
 }
 /**
  * 実際にREST APIで送信するため、commandPayloadからexecuteを除去したinterfaceです。
