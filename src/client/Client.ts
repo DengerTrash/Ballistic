@@ -1,5 +1,6 @@
 import { type GatewayEvents, GatewayManager, RESTManager } from "../endpoints/mod.ts";
-import { ClientEvents ,CommonEvents } from "../event/mod.ts";
+import { ClientEvents } from "./ClientEvent.ts";
+import { CommonEvents } from "./CommonEvent.ts";
 import { GuildCache } from "../structures/guild/mod.ts";
 import { GuildChannelCache } from "../structures/mod.ts";
 import { ClientCommands } from "./ClientCommands.ts";

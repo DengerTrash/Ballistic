@@ -1,6 +1,7 @@
 import { CommonEvents } from "./CommonEvent.ts";
 import type { GatewayEvents } from "../endpoints/mod.ts"
 import type { Client, EventRegisterPayload } from "../mod.ts";
+import { Message } from "../structures/mod.ts";
 
 export class ClientEvents {
     private client: Client;
@@ -11,7 +12,8 @@ export class ClientEvents {
         const trigger = data.trigger;
         const execute = data.execute;
         this.client.gateway.on(trigger,(args) => {
-            data.execute(args);
+            const ce = new CommonEvents(trigger, this.client, args);
+            execute(ce);
         })
     }
     message_create(execute: (event: CommonEvents) => void){

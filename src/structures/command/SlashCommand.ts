@@ -12,8 +12,8 @@ export class SlashCommand extends Command {
 export class SlashCommandEvents extends CommonEvents {
     private token: string;
     private id: string;
-    constructor(event: string, data:any){
-        super(data);
+    constructor(event: string, client: Client, data:any){
+        super(event, client, data);
         this.token = data.token;
         this.id = data.id
     }

@@ -1,7 +1,6 @@
 import type { Client } from "../../mod.ts";
 import { GuildChannel } from "../mod.ts";
 import { Cache } from "../base/mod.ts";
-import { BaseChannelStructure } from "./mod.ts";
 
 
 export class ChannelCache extends Cache {
