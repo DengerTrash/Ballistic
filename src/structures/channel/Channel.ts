@@ -45,7 +45,7 @@ export interface BaseChannelStructure {
 export abstract class Channel extends Base{
 	readonly channel_id: string;
 	data: BaseChannelStructure | undefined
-	constructor(client: Client, channel_id: string, data: BaseChannelStructure){
+	constructor(client: Client, channel_id: string, data?: BaseChannelStructure){
 		super(client)
 		this.channel_id = channel_id
 		this.data = data

@@ -1,6 +1,7 @@
 import type { Client } from "../../mod.ts";
 import { GuildChannel } from "../mod.ts";
 import { Cache } from "../base/mod.ts";
+import { BaseChannelStructure } from "./mod.ts";
 
 
 export class ChannelCache extends Cache {
@@ -17,9 +18,9 @@ export class GuildChannelCache extends ChannelCache{
 		super(client)
 	}
 	public override access(key: string):GuildChannel {
-		const result = super.access(key, () => {
-			return GuildChannel.init(this.client, key)
+		const res = super.access(key, ()=>{
+			return new GuildChannel(this.client, key)
 		})
-		return result as GuildChannel;
+		return res;
 	}
 }

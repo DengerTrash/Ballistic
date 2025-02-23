@@ -9,18 +9,10 @@ export class CommonEvents {
 	public guild?: Guild;
 	public channel?: GuildChannel | undefined;
 	public message?: Message | undefined;
-	public constructor(dat: any){
-		this.client = dat.client
-		this.guild = dat.guild
-		this.message = dat.message
-	}
-	static async restore(event: string, client: Client, data: any){
-		const unko: any = {}
-		unko.client = client;
-		if(data.channel_id) unko.channel = await client.channels.access(data.channel_id);
-		if(data.guild_id) unko.guild = await client.guilds.access(data.guild_id);
-		if(event == 'MESSAGE_CREATE' || event == 'INTERACTION_CREATE') unko.message = await new Message(client, unko.channel!, data)		
-		
-		return unko
+	constructor(event: string, client: Client, data: any){
+		this.client = client;
+		if(data.channel_id) this.channel = client.channels.access(data.channel_id);
+		if(data.guild_id) this.guild = client.guilds.access(data.guild_id);
+		if(event == 'MESSAGE_CREATE' || event == 'INTERACTION_CREATE') this.message = new Message(client, this.channel!, data)
 	}
 }

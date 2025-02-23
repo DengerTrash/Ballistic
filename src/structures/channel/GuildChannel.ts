@@ -13,7 +13,7 @@ export class GuildChannel extends Channel{
 	 * @param client 
 	 * @param channel_id 
 	 */
-	private constructor(client: Client, channel_id: string, structure: BaseChannelStructure){
+	constructor(client: Client, channel_id: string, structure?: BaseChannelStructure){
 		super(client,channel_id, structure);
 		this.client = client;
 		if(this.data?.type == 2) this.voice = new GuildChannelVoice(this.client, this)
