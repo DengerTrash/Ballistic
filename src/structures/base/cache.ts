@@ -7,7 +7,6 @@ export abstract class Cache {
 	public client: Client;
 	public cache = new Map<string, any>;
 
-
 	constructor(client: Client){
 		this.client = client;
 	}

@@ -1,8 +1,8 @@
 import { Client } from "../../mod.ts";
 import { CommandPayload, CommandStructure } from "../../structures/command/Command.ts";
-import { BaseChannelStructure, Channel, Message, MessageContent, MessageGetPayload, MessagePayload } from "../../structures/mod.ts";
+import { BaseChannelStructure, Message, MessagePayload } from "../../structures/mod.ts";
 import Ballister from "../../util/event.ts";
-import { MessageRESTManager } from "./mod.ts";
+import { MessageRESTManager } from "./RestMessage.ts";
 interface reqPayload {
 	method: string,
 	headers: any,
@@ -120,18 +120,4 @@ export class RESTManager extends Ballister{
 		const doit = await this.getTemp(`/channels/${channelId}`);
 		return doit as BaseChannelStructure;
 	}
-	async GetChannelMessages(channelId: string, args?: MessageGetPayload){
-		const limit: number = args?.limit ?? 50;
-		const doit: (MessageContent)[] = await this.getTemp(`channels/${channelId}/messages?limit=${limit}`)
-		
-		const res: (Message)[] = [];
-		doit.forEach(mes => {
-			if(args?.user_id && mes.author.id != args.user_id) return;
-			
-			const passedMessage = new Message(this.client,mes);
-			res.push(passedMessage);
-		});
-		return res;
-	}
-	
 }

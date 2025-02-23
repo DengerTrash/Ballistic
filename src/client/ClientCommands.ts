@@ -25,9 +25,7 @@ export class ClientCommands {
             if(event.application_id != this.client.rest.appId) return;
             if(event.data.type != 1) return;
             if(event.data.name != data.name) return;
-            SlashCommandEvents.restore('INTERACTION_CREATE', this.client, event).then(ce => {
-                data.execute(ce)
-            })
+                data.execute(event)
         })
     }
 }
