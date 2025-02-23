@@ -38,14 +38,13 @@ export class Message extends Base{
 	 * @param channel 
 	 * @param data 
 	 */
-	constructor(client:Client, data: any){
+	constructor(client:Client, channel: GuildChannel, data: any){
 		super(client);
 		this.client = client;
 		this.guild_id = data.guild_id;
 		this.data = data;
 		this.content = data.content
-
-		this.channel = this.client.channels.access(data.channel_id);
+		this.channel = channel
 	}
 	reply(content: string | MessagePayload){
 		this.channel.send(content,{

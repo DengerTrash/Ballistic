@@ -55,7 +55,7 @@ export class GatewayManager extends Ballister{
 		})
 	}
 	protected onopen(){
-		console.log('| on open')
+		console.log('| Websocket open')
 		
 	}
 	protected onmessage(event: MessageEvent){

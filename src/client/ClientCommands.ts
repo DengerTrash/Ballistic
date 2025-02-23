@@ -1,5 +1,5 @@
 import { Client } from "../mod.ts";
-import { CommandPayload, CommandStructure } from "../structures/command/Command.ts";
+import { CommandPayload } from "../structures/command/Command.ts";
 import { SlashCommandEvents } from "../structures/command/SlashCommand.ts";
 
 /**
@@ -20,13 +20,14 @@ export class ClientCommands {
      * @param data 
      */
     async slash(data: CommandPayload){
-        await this.client.restManager.registSlashCommand(data);
-        this.client.gatewayManager.on('INTERACTION_CREATE',(event) => {
-            if(event.application_id != this.client.restManager.appId) return;
+        await this.client.rest.registSlashCommand(data);
+        this.client.gateway.on('INTERACTION_CREATE',(event) => {
+            if(event.application_id != this.client.rest.appId) return;
             if(event.data.type != 1) return;
             if(event.data.name != data.name) return;
-            const ce = new SlashCommandEvents('INTERACTION_CREATE', this.client, event)
-            data.execute(ce)
+            SlashCommandEvents.restore('INTERACTION_CREATE', this.client, event).then(ce => {
+                data.execute(ce)
+            })
         })
     }
 }

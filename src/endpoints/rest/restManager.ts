@@ -1,6 +1,6 @@
 import { Client } from "../../mod.ts";
 import { CommandPayload, CommandStructure } from "../../structures/command/Command.ts";
-import { Message, MessageContent, MessageGetPayload, MessagePayload } from "../../structures/mod.ts";
+import { BaseChannelStructure, Channel, Message, MessageContent, MessageGetPayload, MessagePayload } from "../../structures/mod.ts";
 import Ballister from "../../util/event.ts";
 import { MessageRESTManager } from "./mod.ts";
 interface reqPayload {
@@ -15,13 +15,13 @@ export class RESTManager extends Ballister{
 	public url: string
 	public appId: string | undefined;
 
-	private message: MessageRESTManager
+	public message: MessageRESTManager
 	client: Client;
 	
-	constructor(client: Client,token: string){
+	constructor(client: Client, token: string){
 		super();
 		this.client = client;
-		this.message = new MessageRESTManager()
+		this.message = new MessageRESTManager(this)
 		this.token = token
 		this.url = `${this.baseURL}/v${this.api_version}`
 		this.detectId()
@@ -86,17 +86,6 @@ export class RESTManager extends Ballister{
 		}
 		return resJson
 	}
-	/**
-	 * /channels/[channel Id]/messagesへポストする場合に使用します。
-	 * 成功した場合はtrueを返します。
-	 * @param channel 
-	 * @param args 
-	 * @returns true | false
-	 */
-	async sendMessage(channel: string, args: MessagePayload): Promise<boolean>{
-		const doit = await this.temp(`channels/${channel}/messages`, 'POST', args);
-		return doit;
-	}
 	async registSlashCommand(data: CommandPayload){
 		await this.detectId();
 		try{
@@ -126,6 +115,10 @@ export class RESTManager extends Ballister{
 	async GetSlashCommand(){
 		const doit = await this.getTemp(`applications/${this.appId}/commmands`)
 		return doit;
+	}
+	async GetChannel(channelId: string): Promise<BaseChannelStructure>{
+		const doit = await this.getTemp(`/channels/${channelId}`);
+		return doit as BaseChannelStructure;
 	}
 	async GetChannelMessages(channelId: string, args?: MessageGetPayload){
 		const limit: number = args?.limit ?? 50;

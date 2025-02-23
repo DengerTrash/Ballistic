@@ -21,13 +21,12 @@ export class Client{
 	//*@private */
 	private token: string | undefined;
 	//*@private */
-	public gatewayManager: GatewayManager;
+	private gatewayManager: GatewayManager;
 	//*@private */
-	public restManager: RESTManager;
+	private restManager: RESTManager;
 
 	readonly clientName: string | undefined;
 
-	
 	public channels: GuildChannelCache;
 	public guilds: GuildCache;
 	
@@ -75,7 +74,6 @@ export class Client{
 		
 		this.channels = new GuildChannelCache(this);
 		this.guilds = new GuildCache(this);
-
 		this.gatewayManager = new GatewayManager(this, this.token, this.intentValue);
 		this.restManager = new RESTManager(this, this.token);
 	}

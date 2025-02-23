@@ -18,7 +18,7 @@ export class GuildChannelCache extends ChannelCache{
 	}
 	public override access(key: string):GuildChannel {
 		const result = super.access(key, () => {
-			return new GuildChannel(this.client, key)
+			return GuildChannel.init(this.client, key)
 		})
 		return result as GuildChannel;
 	}

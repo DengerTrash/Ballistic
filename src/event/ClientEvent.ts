@@ -10,9 +10,11 @@ export class ClientEvents {
     events<T extends keyof GatewayEvents>(data: EventRegisterPayload<T>){
         const trigger = data.trigger;
         const execute = data.execute;
-        this.client.gatewayManager.on(trigger,(args) => {
-            const common = new CommonEvents(trigger, this.client, args);
-            execute(common);
+        this.client.gateway.on(trigger,(args) => {
+            CommonEvents.restore(trigger, this.client, args).then(ce =>{
+                const cee = new CommonEvents(ce)
+                execute(cee);
+            });
         })
     }
     message_create(execute: (event: CommonEvents) => void){

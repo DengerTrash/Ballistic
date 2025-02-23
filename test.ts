@@ -13,8 +13,11 @@ client.event.message_create(async(event) => {
 	if(message?.content != 'hello!') return
 	console.log(message?.channel)
 	await message?.reply('なんだお前')
+	//const vc = event.channel?.voice
+	//vc?.joinVoiceChannel(true, true);
 })
 
+/*
 client.command.slash({
 	name: 'ping',
 	description: 'P I G',
@@ -24,4 +27,5 @@ client.command.slash({
 		})
 	}
 })
+*/
 client.login();

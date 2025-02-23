@@ -12,12 +12,12 @@ export class SlashCommand extends Command {
 export class SlashCommandEvents extends CommonEvents {
     private token: string;
     private id: string;
-    constructor(event: string, client: Client, data: any){
-        super(event, client, data);
+    constructor(event: string, data:any){
+        super(data);
         this.token = data.token;
         this.id = data.id
     }
     followUp(message: MessagePayload){
-        this.client.restManager.InteractionFollowUp(4, this.id, this.token, message)
+        this.client.rest.InteractionFollowUp(4, this.id, this.token, message)
     }
 }

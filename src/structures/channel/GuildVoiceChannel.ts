@@ -1,12 +1,12 @@
 import type { Client } from "../../mod.ts";
-import { Channel } from "./mod.ts";
+import { Channel, GuildChannel } from "./mod.ts";
 
-export class GuildVoiceChannel extends Channel{
-	public guild_id: string;
-	constructor(client: Client, guild_id: string, channel_id: string){
-		super(client, channel_id);
+export class GuildChannelVoice{
+	client: Client
+	public channel: GuildChannel;
+	constructor(client: Client, data: GuildChannel){
 		this.client = client;
-		this.guild_id = guild_id;
+		this.channel = data
 	}
 	/**
 	 * 何かしらの準備工事でございます。
@@ -14,6 +14,6 @@ export class GuildVoiceChannel extends Channel{
 	 * @param self_deaf 
 	 */
 	joinVoiceChannel(self_mute: boolean, self_deaf: boolean){
-		this.client.gateway.connectVoiceChannel(this.guild_id, this.channel_id, self_mute, self_deaf);
+		this.client.gateway.connectVoiceChannel(this.channel.data?.guild_id!, this.channel.data?.id, self_mute, self_deaf);
 	}
 }
