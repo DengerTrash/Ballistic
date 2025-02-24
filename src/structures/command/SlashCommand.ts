@@ -10,10 +10,12 @@ export class SlashCommand extends Command {
     }
 }
 export class SlashCommandEvents extends CommonEvents {
+    readonly event_name: string;
     private token: string;
     private id: string;
     constructor(event: string, client: Client, data:any){
-        super(event, client, data);
+        super('INTERACTION_CREATE', client, data);
+        this.event_name = event;
         this.token = data.token;
         this.id = data.id
     }

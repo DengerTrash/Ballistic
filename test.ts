@@ -13,23 +13,25 @@ client.event.message_create(async(event) => {
 	if(message?.content != 'hello!') return
 	console.log(message?.channel)
 	await message?.reply('なんだお前')
-	const vc = event.channel?.voice
-	vc?.joinVoiceChannel(true, true);
 })
 
-/*
-client.command.slash()
-const ping = new Ballistic.SlashCommand();
-ping.name = 'ping',
-ping.description = 'P I G',
-	option: [
-		'VoiceChannel': new 
-	],
+
+client.command.slash({
+	name: 'ping',
+	description: 'P I G',
+	options: {
+		string_option: [
+			{
+				name: 'sttt',
+				description: 'fuck'
+			}
+		]
+	},
 	execute: async(event) => {
 		await event.followUp({
 			content: 'fuck'
 		})
 	}
 })
-	*/
+
 client.login();
