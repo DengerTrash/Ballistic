@@ -40,6 +40,9 @@ export class GuildChannel extends Channel{
 		}
 		this.client.rest.message.send(this.channel_id, putData)
 	}
+	delete(messageId: string){
+		this.client.rest.message.delete(this.channel_id, messageId);
+	}
 /*
 	async get(args?: MessageGetPayload): Promise<(Message)[]>{
 		const res = await this.client.rest.GetChannelMessages(this.channel_id, args)

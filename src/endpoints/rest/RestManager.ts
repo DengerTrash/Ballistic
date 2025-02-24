@@ -68,7 +68,7 @@ export class RESTManager extends Ballister{
 			console.error(`| REST API ERROR: ${e}`)
 		})
 	}
-	async getTemp(url: string){
+	async get(url: string){
 		this.detectId()
 		const link: string = `${this.url}/${url}`
 		const req:reqPayload = {
@@ -113,11 +113,11 @@ export class RESTManager extends Ballister{
 		return doit;
 	}
 	async GetSlashCommand(){
-		const doit = await this.getTemp(`applications/${this.appId}/commmands`)
+		const doit = await this.get(`applications/${this.appId}/commmands`)
 		return doit;
 	}
 	async GetChannel(channelId: string): Promise<BaseChannelStructure>{
-		const doit = await this.getTemp(`/channels/${channelId}`);
+		const doit = await this.get(`/channels/${channelId}`);
 		return doit as BaseChannelStructure;
 	}
 }

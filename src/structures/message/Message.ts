@@ -55,4 +55,7 @@ export class Message extends Base{
 			}
 		})
 	}
+	delete(){
+		this.channel.delete(this.data.id)
+	}
 }

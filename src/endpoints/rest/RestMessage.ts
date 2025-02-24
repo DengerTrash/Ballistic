@@ -18,4 +18,8 @@ export class MessageRESTManager {
         const doit = await this.rest.temp(`channels/${channel}/messages`, 'POST', args);
         return doit;
     }
+    async delete(channelId: string, messageId: string): Promise<boolean>{
+        const doit = await this.rest.temp(`channels/${channelId}/messages/${messageId}`,'DELETE')
+        return doit
+    }
 }
