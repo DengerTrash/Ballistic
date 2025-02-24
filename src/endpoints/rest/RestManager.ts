@@ -86,7 +86,7 @@ export class RESTManager extends Ballister{
 		}
 		return resJson
 	}
-	async registSlashCommand(data: CommandPayload){
+	async registSlashCommand(data: CommandStructure){
 		await this.detectId();
 		try{
 			const dat:CommandStructure = data

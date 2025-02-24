@@ -1,32 +1,39 @@
 import type { Client } from "../../mod.ts";
 import { Base } from "../mod.ts";
 import type { SlashCommandEvents } from "./SlashCommand.ts";
+import { CommandOptions, Localizations, SubCommand } from './SlashCommandOption.ts';
 
 /**
  * slash等のメソッド用のinterfaceです。
  */
 export interface CommandPayload {
 	name: string,
-	onlyGuild?: (string)[],
-	option?:(CommandOption)[]
-	description: string,
+	name_localizations?: Localizations;
+	onlyGuild?: (string)[];
+	subCommand?: Array<SubCommand>;
+	options?: CommandOptions,
+	description: string;
+	description_localizations?: Localizations;
 	execute: (event: SlashCommandEvents) => Promise<void>
 }
 
-export const CommandOptionType = {
-	subCommand: '1',
-}
-const nk: CommandOption = {
-	type: 'subCommand'
-}
-export interface CommandOption {
-	type: (typeof CommandOptionType)[keyof typeof CommandOptionType]
-}
 /**
  * 実際にREST APIで送信するため、commandPayloadからexecuteを除去したinterfaceです。
  */
-export interface CommandStructure extends Omit<CommandPayload, 'execute'> {
+export interface CommandStructure extends Omit<CommandPayload, 'execute' | 'onlyGuild'> {
 }
+
+export function commandDataConverter(data: CommandPayload): CommandStructure{
+	const doit:CommandStructure = {
+		name: data.name,
+		name_localizations: data.name_localizations,
+		description: data.description,
+		description_localizations: data.description_localizations,
+	}
+
+	return doit;
+}
+
 /**
  * コマンドのベースです。
  */

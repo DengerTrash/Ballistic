@@ -1,5 +1,6 @@
 import { Client } from "../mod.ts";
 import { CommandPayload } from "../structures/command/Command.ts";
+import { commandDataConverter } from "../structures/command/mod.ts";
 import { SlashCommandEvents } from "../structures/command/SlashCommand.ts";
 
 /**
@@ -20,12 +21,14 @@ export class ClientCommands {
      * @param data 
      */
     async slash(data: CommandPayload){
-        await this.client.rest.registSlashCommand(data);
+        const conv = commandDataConverter(data);
+        await this.client.rest.registSlashCommand(conv);
         this.client.gateway.on('INTERACTION_CREATE',(event) => {
             if(event.application_id != this.client.rest.appId) return;
             if(event.data.type != 1) return;
             if(event.data.name != data.name) return;
-                data.execute(event)
+            const cce = new SlashCommandEvents(data.name,this.client, event)
+            data.execute(cce)
         })
     }
 }
