@@ -1,4 +1,4 @@
-import * as Ballistic from './src/mod.ts';
+import * as Ballistic from './mod.ts';
 const intents = Ballistic.Intents
 const client = new Ballistic.Client(
 	'Ballistic_dev',

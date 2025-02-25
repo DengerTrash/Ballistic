@@ -8,7 +8,7 @@ export class ClientEvents {
     constructor(client: Client){
         this.client = client;
     }
-    events<T extends keyof GatewayEvents>(data: EventRegisterPayload<T>){
+    private events<T extends keyof GatewayEvents>(data: EventRegisterPayload<T>){
         const trigger = data.trigger;
         const execute = data.execute;
         this.client.gateway.on(trigger,(args) => {
@@ -18,5 +18,8 @@ export class ClientEvents {
     }
     message_create(execute: (event: CommonEvents) => void){
         this.events({trigger:'MESSAGE_CREATE',execute:execute})
+    }
+    message_delete(execute: (event: CommonEvents) => void){
+        this.events({trigger:'MESSAGE_DELETE',execute:execute})
     }
 }

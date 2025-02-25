@@ -12,5 +12,6 @@ export interface GatewayEvents {
   GUILD_MEMBER_ADD?: GuildUser;
   GUILD_MEMBER_REMOVE?: GuildUser;
   MESSAGE_CREATE?: Message;
+  MESSAGE_DELETE?: Message;
 }
 
