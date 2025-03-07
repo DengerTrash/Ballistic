@@ -21,6 +21,11 @@ export interface CommandOptionPayload {
     required?: true;
     option?: CommandOptionPayload
 }
+
+export interface CommandOptionStructure extends Omit<CommandOptionPayload,'option'> {
+    type: number;
+}
+
 export interface SubCommand extends CommandOptionPayload {
 
 }

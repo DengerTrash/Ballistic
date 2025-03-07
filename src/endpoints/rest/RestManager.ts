@@ -97,6 +97,17 @@ export class RESTManager extends Ballister{
 			console.error(`|Regist Command ERROR: ${e}`)
 		}
 	}
+	async registGuildSlashCommand(data: CommandStructure, guild: string){
+		await this.detectId();
+		try{
+			const dat:CommandStructure = data
+			const doit = await this.temp(`applications/${this.appId}/guilds/${guild}/commands`,'POST',dat);
+			console.log(`| Registing Guild Slash command "${data.name}".`);
+			return doit;
+		}catch(e){
+			console.error(`|Regist Command ERROR: ${e}`)
+		}
+	}
 	async InteractionFollowUp(type: number, id:string, token: string, massage: MessagePayload){
 		await this.detectId()
 		const payload = {

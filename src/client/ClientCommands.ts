@@ -22,11 +22,21 @@ export class ClientCommands {
      */
     async slash(data: CommandPayload){
         const conv = commandDataConverter(data);
-        await this.client.rest.registSlashCommand(conv);
+        if(data.onlyGuild){
+            for(const guilda of data.onlyGuild){
+                await this.client.rest.registGuildSlashCommand(conv, guilda);
+            }
+        }
+        else{
+            await this.client.rest.registSlashCommand(conv);
+        }
         this.client.gateway.on('INTERACTION_CREATE',(event) => {
+
             if(event.application_id != this.client.rest.appId) return;
             if(event.data.type != 1) return;
             if(event.data.name != data.name) return;
+
+
             const cce = new SlashCommandEvents(data.name,this.client, event)
             data.execute(cce)
         })

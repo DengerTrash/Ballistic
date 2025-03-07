@@ -16,21 +16,23 @@ client.event.message_create(async(event) => {
 	await message?.delete()
 })
 
-
 client.command.slash({
 	name: 'ping',
 	description: 'P I G',
+	onlyGuild: [
+		'1324304164175614003'
+	],
 	options: {
 		string_option: [
 			{
 				name: 'sttt',
-				description: 'fuck'
+				description: 'description'
 			}
 		]
 	},
 	execute: async(event) => {
 		await event.followUp({
-			content: 'fuck'
+			content: 'pong!'
 		})
 	}
 })

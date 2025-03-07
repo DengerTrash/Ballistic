@@ -36,7 +36,7 @@ export abstract class Cache {
 	public access(key: string, doodoo: () => any){
 		const result = this._takeit(key);
 		if(result) return result;
-		else{
+		else {
 			const rere = doodoo()
 			this.cache.set(key, rere)
 			return rere;

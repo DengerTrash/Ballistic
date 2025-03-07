@@ -20,7 +20,8 @@ export interface CommandPayload {
 /**
  * 実際にREST APIで送信するため、commandPayloadからexecuteを除去したinterfaceです。
  */
-export interface CommandStructure extends Omit<CommandPayload, 'execute' | 'onlyGuild'> {
+export interface CommandStructure extends Omit<CommandPayload, 'execute' | 'onlyGuild' | 'options'> {
+	options?: (any)[]
 }
 
 export function commandDataConverter(data: CommandPayload): CommandStructure{
@@ -29,6 +30,12 @@ export function commandDataConverter(data: CommandPayload): CommandStructure{
 		name_localizations: data.name_localizations,
 		description: data.description,
 		description_localizations: data.description_localizations,
+	}
+	if(data.options?.string_option){
+		for(const stringOption of data.options.string_option){
+			
+			doit.options?.push(stringOption)
+		}
 	}
 
 	return doit;
