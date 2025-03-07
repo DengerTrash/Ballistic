@@ -24,13 +24,13 @@ client.command.slash({
 		string_option: [
 			{
 				name: 'sttt',
-				description: 'fuck'
+				description: 'description'
 			}
 		]
 	},
 	execute: async(event) => {
 		await event.followUp({
-			content: 'fuck'
+			content: 'pong!'
 		})
 	}
 })
