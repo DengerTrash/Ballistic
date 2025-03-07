@@ -16,6 +16,16 @@ export class ClientEvents {
             execute(ce);
         })
     }
+    channel_create(execute: (event: CommonEvents) => void){
+        this.events({trigger:'CHANNEL_CREATE',execute:execute})
+    }
+    channel_edit(execute: (event: CommonEvents) => void){
+        this.events({trigger:'CHANNEL_EDIT',execute:execute})
+    }
+    channel_delete(execute: (event: CommonEvents) => void){
+        this.events({trigger:'CHANNEL_DELETE',execute:execute})
+    }
+
     message_create(execute: (event: CommonEvents) => void){
         this.events({trigger:'MESSAGE_CREATE',execute:execute})
     }
