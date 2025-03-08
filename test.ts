@@ -16,7 +16,7 @@ client.event.message_create(async(event) => {
 	await message?.delete()
 })
 
-client.command.slash({
+const ping: Ballistic.CommandPayload = ({
 	name: 'ping',
 	description: 'P I G',
 	onlyGuild: [
@@ -36,5 +36,6 @@ client.command.slash({
 		})
 	}
 })
+client.command.slash(ping)
 
 client.login();
