@@ -12,22 +12,27 @@ export interface WebSocketResponse {
 export class GatewayManager extends Ballister{
 	private token: string;
 	private intent: number;
-	private websocket: WebSocket | undefined
-	private sequence_number: number | null = null
-	private isHeartbeatSend: boolean = false
-	private readyStatus: boolean = false
-	private resume_gateway_url: string | undefined
-	private session_id: string | undefined
-	public client!: Client
-	public api_version: number = 10
-	public heartbeat_interval: number | null = null
+	private websocket: WebSocket | undefined;
+	private sequence_number: number | null = null;
+	private isHeartbeatSend: boolean = false;
+	private readyStatus: boolean = false;
+	private resume_gateway_url: string | undefined;
+	private session_id: string | undefined;
+	public client!: Client;
+	public api_version: number = 10;
+	public heartbeat_interval: number | null = null;
 	public bot_name: string | undefined;
-	
+	readonly sendGatewayEvents:boolean = false;
+
 	constructor(client: Client, token: string, intent: number){
-		super()
+		super();
 		this.token = token!
 		this.client = client
 		this.intent = intent;
+
+		if(this.client.option?.sendGatewayEvents){
+			this.sendGatewayEvents = true;
+		}
 	}
 	public connect(){
 		this.initWebSocket()
@@ -67,8 +72,10 @@ export class GatewayManager extends Ballister{
 					console.log(`| ${this.bot_name} is READY!`)
 				}
 				else{
-					console.log(`op: ${op}\n`, `s: ${s}\n`, `t: ${t}`)
-					console.dir(d)
+					if(this.sendGatewayEvents){
+						console.log(`op: ${op}\n`, `s: ${s}\n`, `t: ${t}`)
+						console.dir(d)
+					}
 				}
 				this.readyStatus = true
 				this.emit(t!,d);

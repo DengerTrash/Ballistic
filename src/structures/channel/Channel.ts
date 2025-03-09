@@ -1,3 +1,4 @@
+import { LargeNumberLike } from "node:crypto";
 import type { Client } from "../../mod.ts";
 import { Base } from "../base/mod.ts";
 
@@ -39,6 +40,11 @@ export interface BaseChannelStructure {
 	default_forum_layout?: number
 }
 
+export interface ChannelPayload {
+	name: string;
+	type: number;
+	
+}
 /**
  * チャンネルのベースです。現状では特別なことはありません。
  */

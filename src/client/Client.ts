@@ -14,6 +14,10 @@ export interface EventRegisterPayload<Event extends keyof GatewayEvents>{
 	trigger: Event;
 	execute: (event: CommonEvents) => void;
 }
+
+export interface ClientOption {
+	sendGatewayEvents?: boolean;
+}
 /**
  * 至極普通のクライアントですが、何か？
  * This is a client.. but what?
@@ -33,6 +37,7 @@ export class Client{
 	
 	private intentValue: number | undefined;
 	
+	readonly option: ClientOption | undefined;
 	/**
 	 * コマンド関連の記述はClientCommands.tsに置きました。
 	 */
@@ -51,12 +56,16 @@ export class Client{
 	 * A Discord bot client.
 	 * @param token 
 	 */
-	constructor(clientName: string, token: string, intent: (number)[]){
+	constructor(clientName: string, token: string, intent: (number)[], option?:ClientOption){
 		this.token = token;
 		this.clientName = clientName;
 
 		if(!this.token){
 			throw new Error('Token is undefined or Invalid')
+		}
+
+		if(option){
+			this.option = option;
 		}
 
 		//Intentを計算します。

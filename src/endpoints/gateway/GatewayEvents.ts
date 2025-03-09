@@ -8,7 +8,6 @@ Guild,
 } from "../../structures/mod.ts";
 
 export interface GatewayEvents {
-
   APPLICATION_COMMAND_PERMISSIONS_UPDATE?: any;
   AUTO_MODERATION_RULE_CREATE:AutoModerationRule;
   AUTO_MODERATION_RULE_DELETE:AutoModerationRule;
