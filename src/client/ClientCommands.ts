@@ -1,5 +1,5 @@
-import { Client } from "../mod.ts";
-import { CommandPayload } from "../structures/command/Command.ts";
+import type { Client } from "../mod.ts";
+import type { CommandPayload } from "../structures/command/Command.ts";
 import { commandDataConverter } from "../structures/command/mod.ts";
 import { SlashCommandEvents } from "../structures/command/SlashCommand.ts";
 
@@ -35,7 +35,6 @@ export class ClientCommands {
             if(event.application_id != this.client.rest.appId) return;
             if(event.data.type != 1) return;
             if(event.data.name != data.name) return;
-
 
             const cce = new SlashCommandEvents(data.name,this.client, event)
             data.execute(cce)
