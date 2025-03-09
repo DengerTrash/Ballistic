@@ -10,7 +10,7 @@ interface reqPayload {
 }
 export class RESTManager extends Ballister{
 	private token: string | undefined;
-	public baseURL: string = 'https://discord.com/api';
+	private baseURL: string = 'https://discord.com/api';
 	public api_version: number = 10
 	public url: string
 	public appId: string | undefined;

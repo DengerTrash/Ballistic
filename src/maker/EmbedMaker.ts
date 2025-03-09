@@ -19,3 +19,7 @@ export class EmbedMaker {
 		this.structure = options;
 	}
 }
+
+export function EmbedConverter(embed: EmbedMaker){
+	return embed.structure as EmbedStructure;
+}

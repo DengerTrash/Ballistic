@@ -12,10 +12,12 @@ client.event.message_create(async(event) => {
 	const { message } = event;
 	if(message?.content != 'hello!') return
 	console.log(message?.channel)
-	//await message?.reply('なんだお前')
-	await message?.delete()
+	await message?.reply('なんだお前')
 })
-
+const embed:Ballistic.EmbedStructure = {
+	title: 'title',
+	description: 'description'
+}
 const ping: Ballistic.CommandPayload = ({
 	name: 'ping',
 	description: 'P I G',
@@ -32,7 +34,8 @@ const ping: Ballistic.CommandPayload = ({
 	},
 	execute: async(event) => {
 		await event.followUp({
-			content: 'pong!'
+			content: '',
+			embeds: [embed]
 		})
 	}
 })

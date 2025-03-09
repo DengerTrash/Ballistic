@@ -18,6 +18,7 @@ export interface EventRegisterPayload<Event extends keyof GatewayEvents>{
 export interface ClientOption {
 	sendGatewayEvents?: boolean;
 }
+
 /**
  * 至極普通のクライアントですが、何か？
  * This is a client.. but what?
@@ -25,19 +26,16 @@ export interface ClientOption {
 export class Client{
 	//*@private */
 	private token: string | undefined;
-	//*@private */
 	private gatewayManager: GatewayManager;
-	//*@private */
 	private restManager: RESTManager;
+	private intentValue: number | undefined;
 
 	readonly clientName: string | undefined;
+	readonly option: ClientOption | undefined;
 
 	public channels: GuildChannelCache;
 	public guilds: GuildCache;
 	
-	private intentValue: number | undefined;
-	
-	readonly option: ClientOption | undefined;
 	/**
 	 * コマンド関連の記述はClientCommands.tsに置きました。
 	 */

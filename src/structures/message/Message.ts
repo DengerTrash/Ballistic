@@ -1,11 +1,13 @@
-import type { Client } from "../../mod.ts";
+import type { Client, EmbedStructure } from "../../mod.ts";
 import type { GuildChannel, User } from '../mod.ts'
 import { Base } from "../base/mod.ts";
+import { EmbedMaker } from "../../maker/mod.ts";
+import { EmbedConverter } from "../../maker/EmbedMaker.ts";
 
 export interface MessagePayload {
 	content: string,
 	tts?: boolean,
-	embeds?: any,
+	embeds?: (EmbedStructure)[],
 	allowed_mentions?: any,
 	message_reference?: any,
 	components?: any,
@@ -31,6 +33,7 @@ export class Message extends Base{
 	public channel: GuildChannel;
 	public content: string | undefined;
 	public guild_id: number | undefined;
+	public embed: Array<EmbedStructure> | undefined;
 
 	/**
 	 * 
@@ -45,6 +48,12 @@ export class Message extends Base{
 		this.data = data;
 		this.content = data.content
 		this.channel = channel
+		if(data.embeds){
+			for(const embed of data.embeds){
+				const embbed = EmbedConverter(embed)
+				this.embed?.push(embbed)
+			}
+		}
 	}
 	reply(content: string | MessagePayload){
 		this.channel.send(content,{
