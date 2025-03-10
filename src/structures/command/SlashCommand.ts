@@ -1,4 +1,4 @@
-import { CommonEvents } from "../../client/CommonEvent.ts";
+import { CommonEvents } from "./CommonEvent.ts";
 import { Command, type CommandPayload } from "./Command.ts";
 import type { MessagePayload } from "../mod.ts";
 import type { Client } from "../../mod.ts";

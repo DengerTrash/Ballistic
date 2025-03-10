@@ -1,6 +1,7 @@
 import { Client } from "../../mod.ts";
+import { BaseChannelStructure } from "../../structures/channel/Channel.ts";
 import { CommandPayload, CommandStructure } from "../../structures/command/Command.ts";
-import { BaseChannelStructure, Message, MessagePayload } from "../../structures/mod.ts";
+import { Message, MessagePayload } from "../../structures/mod.ts";
 import Ballister from "../../util/event.ts";
 import { MessageRESTManager } from "./RestMessage.ts";
 interface reqPayload {

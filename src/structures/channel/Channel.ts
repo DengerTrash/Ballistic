@@ -1,6 +1,6 @@
 import { LargeNumberLike } from "node:crypto";
 import type { Client } from "../../mod.ts";
-import { Base } from "../base/mod.ts";
+import { Base } from "../base/Base.ts";
 
 
 export interface BaseChannelStructure {

@@ -1,6 +1,6 @@
 import type { Client } from "../mod.ts";
 import type { CommandPayload } from "../structures/command/Command.ts";
-import { commandDataConverter } from "../structures/command/mod.ts";
+import { commandDataConverter } from "../structures/command/Command.ts";
 import { SlashCommandEvents } from "../structures/command/SlashCommand.ts";
 
 /**
@@ -30,7 +30,7 @@ export class ClientCommands {
         else{
             await this.client.rest.registSlashCommand(conv);
         }
-        this.client.gateway.on('INTERACTION_CREATE',(event) => {
+        this.client.gateway.on('INTERACTION_CREATE',(event: any) => {
 
             if(event.application_id != this.client.rest.appId) return;
             if(event.data.type != 1) return;

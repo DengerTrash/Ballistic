@@ -1,5 +1,5 @@
 import type { Client } from "../../mod.ts";
-import { Base } from "../mod.ts";
+import { Base } from "../base/Base.ts";
 import type { SlashCommandEvents } from "./SlashCommand.ts";
 import { CommandOptions, Localizations, SubCommand } from './SlashCommandOption.ts';
 

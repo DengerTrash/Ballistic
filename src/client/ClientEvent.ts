@@ -1,7 +1,6 @@
-import { CommonEvents } from "./CommonEvent.ts";
+import { CommonEvents } from "../structures/command/CommonEvent.ts";
 import type { GatewayEvents } from "../endpoints/mod.ts"
 import type { Client, EventRegisterPayload } from "./Client.ts";
-import { Message } from "../structures/mod.ts";
 
 export class ClientEvents {
     private client: Client;

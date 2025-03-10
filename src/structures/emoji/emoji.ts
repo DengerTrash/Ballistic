@@ -1,4 +1,4 @@
-import { User } from "../mod.ts";
+import type { User } from "../user/User.ts";
 
 export interface EmojiStructure {
     id: string;

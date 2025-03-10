@@ -1,5 +1,5 @@
 import { Client } from "../../mod.ts";
-import { Base } from "../mod.ts";
+import { Base } from "../base/Base.ts";
 
 export interface AutoModerationRuleStructure {
     id: string;

@@ -1,4 +1,4 @@
-import { ChannelPayload, MessagePayload } from "../../structures/mod.ts";
+import { ChannelPayload } from "../../structures/channel/Channel.ts";
 import { RESTManager } from "../mod.ts";
 
 export class GuildRESTManager {

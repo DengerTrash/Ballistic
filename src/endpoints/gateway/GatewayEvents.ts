@@ -1,11 +1,6 @@
+import { Channel } from "diagnostics_channel";
 import { AutoModerationRule } from "../../structures/auto_moderation/Auto_Moderation_Rule.ts";
-import {
-Channel,
-Guild,
-  GuildChannel,
-  GuildUser,
-  Message
-} from "../../structures/mod.ts";
+
 
 export interface GatewayEvents {
   APPLICATION_COMMAND_PERMISSIONS_UPDATE?: any;

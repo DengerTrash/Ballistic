@@ -3,9 +3,9 @@ import type { Client } from '../../mod.ts';
 /**
  * キャッシュを保存できるabstractクラスです。
  */
-export abstract class Cache {
+export abstract class Cache<T> {
 	public client: Client;
-	public cache = new Map<string, any>;
+	public cache = new Map<string, T>;
 
 	constructor(client: Client){
 		this.client = client;
@@ -15,7 +15,7 @@ export abstract class Cache {
 	 * @param key 
 	 * @param data 
 	 */
-	public _update(key: string, data: any){
+	public _update(key: string, data: T){
 		this.cache.set(key, data);
 	}
 	/**
@@ -23,9 +23,9 @@ export abstract class Cache {
 	 * @param key 
 	 * @returns 
 	 */
-	public _takeit(key: string): any{
+	public _takeit(key: string): T{
 		const result = this.cache.get(key);
-		return result;
+		return result as T;
 	}
 	/**
 	 * キャッシュにアクセスし、発見できた場合はそのインスタンスを、ない場合は第二引数で指定したインスタンスが生成され、それ自身を返します。

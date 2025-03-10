@@ -1,6 +1,7 @@
 import type { Client } from "../../mod.ts";
-import { Channel, type Message, type MessageGetPayload, type MessagePayload } from "../mod.ts";
-import { BaseChannelStructure, GuildChannelVoice } from "./mod.ts";
+import { MessagePayload } from "../mod.ts";
+import { BaseChannelStructure, Channel } from "./Channel.ts";
+import { GuildChannelVoice } from "./GuildVoiceChannel.ts";
 
 /**
  * ギルドチャンネル用のChannelです。

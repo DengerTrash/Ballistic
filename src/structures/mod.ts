@@ -1,5 +1,1 @@
-export * from './base/mod.ts'
-export * from './channel/mod.ts'
-export * from './guild/mod.ts'
 export * from './message/Message.ts'
-export * from './user/mod.ts'

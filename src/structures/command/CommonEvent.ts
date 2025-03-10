@@ -1,5 +1,9 @@
-import type { Client } from "../mod.ts";
-import { Guild, GuildChannel, Message, MessageContent, User } from "../structures/mod.ts";
+import type { Client } from "../../mod.ts";
+import type { GuildChannel } from "../channel/GuildChannel.ts";
+import type { Guild } from "../guild/Guild.ts";
+import type { User } from "../user/User.ts";
+import { MessageContent, Message } from "../mod.ts";
+
 
 export interface AnyEventPayload extends MessageContent {
 	guild_id: string

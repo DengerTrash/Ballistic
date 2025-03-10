@@ -1,8 +1,9 @@
 import type { Client, EmbedStructure } from "../../mod.ts";
-import type { GuildChannel, User } from '../mod.ts'
-import { Base } from "../base/mod.ts";
+import { Base } from "../base/Base.ts";
 import { EmbedMaker } from "../../maker/mod.ts";
 import { EmbedConverter } from "../../maker/EmbedMaker.ts";
+import { GuildChannel } from "../channel/GuildChannel.ts";
+import { User } from "../user/User.ts";
 
 export interface MessagePayload {
 	content: string,

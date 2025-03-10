@@ -1,5 +1,5 @@
 import type { Client } from "../../mod.ts";
-import { Channel, GuildChannel } from "./mod.ts";
+import { GuildChannel } from "./GuildChannel.ts";
 
 export class GuildChannelVoice{
 	client: Client
