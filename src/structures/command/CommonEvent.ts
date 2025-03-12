@@ -16,7 +16,11 @@ export class CommonEvents {
 	public message?: Message | undefined;
 	constructor(event: string, client: Client, data: any){
 		this.client = client;
-		if(data.channel_id) this.channel = new GuildChannel(client, data.channel_id);
+		if(data.channel_id) {
+			this.client.rest.GetChannel(data.channel_id).then((dat) => {
+				this.channel = new GuildChannel(client, data.channel_id, dat);
+			});
+		}
 		if(data.guild_id) this.guild = new Guild(client, data.guild_id);
 		if(event == 'MESSAGE_CREATE' || event == 'INTERACTION_CREATE') this.message = new Message(client, this.channel!, data)
 		this.author = data.author

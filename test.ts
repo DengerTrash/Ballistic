@@ -6,7 +6,10 @@ const client = new Ballistic.Client(
 	Deno.env.get('TOKEN')!,
 	[
 		intents.all
-	]
+	],
+	{
+		sendGatewayEvents: true
+	}
 );
 
 client.event.message_create(async(event: CommonEvents) => {
