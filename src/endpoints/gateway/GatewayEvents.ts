@@ -1,4 +1,4 @@
-import { Channel } from "diagnostics_channel";
+import { Channel } from "../../structures/channel/Channel.ts";
 import { AutoModerationRule } from "../../structures/auto_moderation/Auto_Moderation_Rule.ts";
 
 

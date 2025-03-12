@@ -11,8 +11,16 @@ const client = new Ballistic.Client(
 
 client.event.message_create(async(event: CommonEvents) => {
 	const { message } = event;
+	if(message?.channel_id == '1145141919') return;
 	if(message?.content != 'hello!') return
 	console.log(message?.channel)
+	const messages = await event.channel?.getMessage({limit:5})
+	messages?.forEach((msg) => {
+		if(msg.author?.id == client.clientId){
+			msg.delete()
+		}
+	})
+	console.log(messages)
 	await message?.reply('なんだお前')
 })
 const embed:Ballistic.EmbedStructure = {

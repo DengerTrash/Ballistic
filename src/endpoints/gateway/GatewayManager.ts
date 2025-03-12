@@ -1,6 +1,7 @@
 //Thanks harmony!
 import type { Client } from "../../client/Client.ts"
 import Ballister from "../../util/event.ts"
+import { GatewayEvents } from "../mod.ts";
 
 export interface WebSocketResponse {
 	op: number,
@@ -8,6 +9,7 @@ export interface WebSocketResponse {
 	s?: number,
 	t?: string
 }
+type DType<T extends keyof GatewayEvents> = GatewayEvents[T]
 
 export class GatewayManager extends Ballister{
 	private token: string;
@@ -78,7 +80,8 @@ export class GatewayManager extends Ballister{
 					}
 				}
 				this.readyStatus = true
-				this.emit(t!,d);
+				if(!t) return;
+				this.emit(t!,d); 
 
 				break
 			}

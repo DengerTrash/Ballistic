@@ -1,7 +1,7 @@
 import { Client } from "../../mod.ts";
 import { BaseChannelStructure } from "../../structures/channel/Channel.ts";
-import { CommandPayload, CommandStructure } from "../../structures/command/Command.ts";
-import { Message, MessagePayload } from "../../structures/mod.ts";
+import { CommandStructure } from "../../structures/command/Command.ts";
+import { Message, MessageContent, MessageGetPayload, MessagePayload } from "../../structures/mod.ts";
 import Ballister from "../../util/event.ts";
 import { MessageRESTManager } from "./RestMessage.ts";
 interface reqPayload {
@@ -131,5 +131,23 @@ export class RESTManager extends Ballister{
 	async GetChannel(channelId: string): Promise<BaseChannelStructure>{
 		const doit = await this.get(`/channels/${channelId}`);
 		return doit as BaseChannelStructure;
+	}
+	async getAboutMe(){
+		const doit = await this.get(`/users/@me`)
+		return doit;
+	}
+	async getChannelMessages(channelId: string, args?: MessageGetPayload): Promise<(Message)[]>{
+		const query = new URLSearchParams();
+		if(args?.limit) query.append('limit', args.limit.toString());
+
+		const doit = await this.get(`/channels/${channelId}/messages?` + query);
+
+		const channel = this.client.channels.access(channelId);
+		if(!channel) throw new Error('Channel not found');
+		const meme: Array<Message> = [];
+		doit.forEach((data: MessageContent) => {
+			meme.push(new Message(this.client, channel, data))
+		});
+		return meme;
 	}
 }

@@ -1,5 +1,5 @@
 import type { Client } from "../../mod.ts";
-import { MessagePayload } from "../mod.ts";
+import { Message, MessageContent, MessageGetPayload, MessagePayload } from "../mod.ts";
 import { BaseChannelStructure, Channel } from "./Channel.ts";
 import { GuildChannelVoice } from "./GuildVoiceChannel.ts";
 
@@ -44,11 +44,8 @@ export class GuildChannel extends Channel{
 	delete(messageId: string){
 		this.client.rest.message.delete(this.channel_id, messageId);
 	}
-/*
-	async get(args?: MessageGetPayload): Promise<(Message)[]>{
-		const res = await this.client.rest.GetChannelMessages(this.channel_id, args)
-
+	async getMessage(args?: MessageGetPayload): Promise<(Message)[]>{
+		const res = await this.client.rest.getChannelMessages(this.channel_id, args)
 		return res;
 	}
-*/
 }

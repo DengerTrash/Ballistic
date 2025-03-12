@@ -31,4 +31,7 @@ export class ClientEvents {
     message_delete(execute: (event: CommonEvents) => void){
         this.events({trigger:'MESSAGE_DELETE',execute:execute})
     }
+    guild_member_update(execute: (event: CommonEvents) => void){
+        this.events({trigger:'GUILD_MEMBER_UPDATE',execute:execute})
+    }
 }

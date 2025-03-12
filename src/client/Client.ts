@@ -29,6 +29,7 @@ export class Client{
 	private gatewayManager: GatewayManager;
 	private restManager: RESTManager;
 	private intentValue: number | undefined;
+	public clientId: string | undefined;
 
 	readonly clientName: string | undefined;
 	readonly option: ClientOption | undefined;
@@ -84,11 +85,15 @@ export class Client{
 		this.guilds = new GuildCache(this);
 		this.gatewayManager = new GatewayManager(this, this.token, this.intentValue);
 		this.restManager = new RESTManager(this, this.token);
+
+	
 	}
 	/**
 	 * Login client.
 	 */
-	login(){
+	async login(){
+		const dat = await this.rest.getAboutMe()
+		this.clientId = dat.id;
 		this.gatewayManager.connect();
 	}
 }
