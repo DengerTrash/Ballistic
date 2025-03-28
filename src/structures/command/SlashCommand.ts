@@ -1,4 +1,4 @@
-import { CommonEvents } from "./CommonEvent.ts";
+import { Interaction } from "../../client/Interaction.ts";
 import { Command, type CommandPayload } from "./Command.ts";
 import type { MessagePayload } from "../mod.ts";
 import type { Client } from "../../mod.ts";
@@ -9,7 +9,7 @@ export class SlashCommand extends Command {
         super(client, datt)
     }
 }
-export class SlashCommandEvents extends CommonEvents {
+export class SlashCommandEvents extends Interaction<SlashCommand> {
     readonly event_name: string;
     private token: string;
     private id: string;

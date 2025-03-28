@@ -9,9 +9,10 @@ export class GuildChannelCache extends Cache<GuildChannel>{
 	constructor(client: Client){
 		super(client)
 	}
-	public override access(key: string):GuildChannel {
-		const res = super.access(key, ()=>{
-			return new GuildChannel(this.client, key)
+	public override access(key: string):Promise<GuildChannel> {
+		const res = super.access(key, async()=>{
+			const structure = await this.client.rest.GetChannel(key)
+			return new GuildChannel(this.client, key, structure)
 		})
 		return res;
 	}

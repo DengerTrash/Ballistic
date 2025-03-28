@@ -13,7 +13,8 @@ export class GuildChannelVoice{
 	 * @param self_mute 
 	 * @param self_deaf 
 	 */
-	joinVoiceChannel(self_mute: boolean, self_deaf: boolean){
-		this.client.gateway.connectVoiceChannel(this.channel.data?.guild_id!, this.channel.data?.id, self_mute, self_deaf);
+	async join(self_mute: boolean = true, self_deaf: boolean = true){
+		console.log(this.channel)
+		await this.client.gateway.connectVoiceChannel(this.channel.data?.guild_id!, this.channel.data?.id, self_mute, self_deaf);
 	}
 }

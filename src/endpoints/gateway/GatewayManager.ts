@@ -129,6 +129,7 @@ export class GatewayManager extends Ballister{
 		const payload = {
 			op: 4,
 			d: {
+				guild_id: guild,
 				channel_id: channel,
 				self_mute: self_mute,
 				self_deaf: self_deaf

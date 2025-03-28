@@ -6,7 +6,7 @@
 		"type": "node",
 		"cwd": "${workspaceFolder}",
 		"runtimeExecutable": "deno",
-		"runtimeArgs": ["test.ts"]
+		"runtimeArgs": ["tests/test.ts"]
 	},
 	{
 		"name": "run this file",

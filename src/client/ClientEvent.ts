@@ -1,37 +1,25 @@
-import { CommonEvents } from "../structures/command/CommonEvent.ts";
+import { Interaction } from "./Interaction.ts";
 import type { GatewayEvents } from "../endpoints/mod.ts"
 import type { Client, EventRegisterPayload } from "./Client.ts";
+import { Channel } from "../structures/channel/Channel.ts";
+import { Message } from "../structures/mod.ts";
 
+export type InteractionEvent<T> = (event: Interaction<T>) => Promise<void> | void
+//export type CustomInteraction = (event: keyof GatewayEvents,(event: Interaction<>) => Promise<void> | void)
 export class ClientEvents {
     private client: Client;
     constructor(client: Client){
         this.client = client;
     }
-    private events<T extends keyof GatewayEvents>(data: EventRegisterPayload<T>){
+    private events<T>(data: EventRegisterPayload<T>){
         const trigger = data.trigger;
         const execute = data.execute;
         this.client.gateway.on(trigger,(args) => {
-            const ce = new CommonEvents(trigger, this.client, args);
+            const ce = new Interaction<T>(trigger, this.client, args);
             execute(ce);
         })
     }
-    channel_create(execute: (event: CommonEvents) => void){
-        this.events({trigger:'CHANNEL_CREATE',execute:execute})
-    }
-    channel_edit(execute: (event: CommonEvents) => void){
-        this.events({trigger:'CHANNEL_EDIT',execute:execute})
-    }
-    channel_delete(execute: (event: CommonEvents) => void){
-        this.events({trigger:'CHANNEL_DELETE',execute:execute})
-    }
-
-    message_create(execute: (event: CommonEvents) => void){
-        this.events({trigger:'MESSAGE_CREATE',execute:execute})
-    }
-    message_delete(execute: (event: CommonEvents) => void){
-        this.events({trigger:'MESSAGE_DELETE',execute:execute})
-    }
-    guild_member_update(execute: (event: CommonEvents) => void){
-        this.events({trigger:'GUILD_MEMBER_UPDATE',execute:execute})
+    message_create(execute: InteractionEvent<Message>){
+        this.events<Message>({trigger:'MESSAGE_CREATE',execute:execute})
     }
 }

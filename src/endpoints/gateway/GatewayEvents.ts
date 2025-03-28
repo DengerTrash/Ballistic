@@ -1,7 +1,13 @@
 import { Channel } from "../../structures/channel/Channel.ts";
 import { AutoModerationRule } from "../../structures/auto_moderation/Auto_Moderation_Rule.ts";
+import { Interaction } from "../../mod.ts";
 
-
+interface EventsType {
+  [key: string]: string
+}
+export const Events: EventsType = {
+  message_create: 'MESSAGE_CREATE'
+}
 export interface GatewayEvents {
   APPLICATION_COMMAND_PERMISSIONS_UPDATE?: any;
   AUTO_MODERATION_RULE_CREATE:AutoModerationRule;

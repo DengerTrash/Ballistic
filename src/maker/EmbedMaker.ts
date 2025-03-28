@@ -1,4 +1,4 @@
-export interface EmbedStructure {
+export interface Embed {
 	title?: string,
 	type?: string,
 	description?: string,
@@ -14,12 +14,12 @@ export interface EmbedFooter {
 }
 
 export class EmbedMaker {
-	public structure: EmbedStructure;
-	constructor(options: EmbedStructure){
+	public structure: Embed;
+	constructor(options: Embed){
 		this.structure = options;
 	}
 }
 
 export function EmbedConverter(embed: EmbedMaker){
-	return embed.structure as EmbedStructure;
+	return embed.structure as Embed;
 }

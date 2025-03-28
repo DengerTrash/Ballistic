@@ -1,5 +1,5 @@
 import * as Ballistic from './mod.ts';
-import { CommonEvents } from "./src/structures/command/CommonEvent.ts";
+import { Interaction } from "./src/client/Interaction.ts";
 const intents = Ballistic.Intents
 const client = new Ballistic.Client(
 	'Ballistic_dev',
@@ -12,7 +12,7 @@ const client = new Ballistic.Client(
 	}
 );
 
-client.event.message_create(async(event: CommonEvents) => {
+client.event.message_create(async(event: Interaction) => {
 	const { message } = event;
 	if(message?.channel_id == '1145141919') return;
 	if(message?.content != 'hello!') return

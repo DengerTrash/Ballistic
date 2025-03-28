@@ -21,7 +21,7 @@ type ChannelType = keyof typeof channelTypeList;
  */
 export class GuildChannel extends Channel{
 	type: number;
-	voice: GuildChannelVoice | undefined
+	voice?: GuildChannelVoice
 	/**
 	 * チャンネルIDを指定しればとりあえずできます。
 	 * @param client 
@@ -30,12 +30,16 @@ export class GuildChannel extends Channel{
 	constructor(client: Client, channel_id: string, structure?: BaseChannelStructure){
 		super(client,channel_id, structure);
 		this.client = client;
-		this.type = structure!.type || 0;
-		if(this.data?.type == 2) this.voice = new GuildChannelVoice(this.client, this)
+		this.type = structure?.type || 0;
+		if(this.type == 2) this.voice = new GuildChannelVoice(this.client, this)
 	}
 	static init = async(client: Client, channel_id: string) => {
 		const dat = await client.rest.GetChannel(channel_id)
 		return new GuildChannel(client,channel_id, dat)
+	}
+	isVoice(): boolean{
+		if(this.voice) return true
+		return false
 	}
 	/**
 	 * 指定したチャンネルにメッセージを送信します。
@@ -46,7 +50,7 @@ export class GuildChannel extends Channel{
 		let putData: MessagePayload = {
 			content: ''
 		}
-		if(typeof data == 'string') putData.content = data
+		if(typeof data === 'string') putData.content = data
 		else putData = data
 
 		if(options){
